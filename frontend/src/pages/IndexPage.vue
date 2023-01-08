@@ -2,8 +2,7 @@
   <q-page class="flex flex-center">
     <q-form
       id="url_submission"
-      @submit.prevent
-    >
+      @submit.prevent>
       <q-input
         v-model="url"
         name="video_url"
@@ -13,16 +12,17 @@
         label="Insert Video URL"
       />
       <q-btn
+        to="/summarised"
+        id="submit-button"
         label="Submit"
         type="submit"
-        color="primary"
-      />
+        color="primary" />
     </q-form>
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 // import { api } from 'boot/axios'
 // import { useQuasar } from 'quasar'
 // const urlSubmission = document.getElementById('url_submission')
@@ -35,7 +35,13 @@ import { defineComponent } from 'vue'
 // }
 // if (urlSubmission) urlSubmission.addEventListener('submit', submitForm)
 
+// function switchToSummarised() {
+//   Document.
+// }
+
+
+
 export default defineComponent({
-  name: 'IndexPage'
-})
+  name: "IndexPage",
+});
 </script>

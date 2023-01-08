@@ -13,12 +13,8 @@
       </q-toolbar> -->
 
       <div class="q-px-lg q-pt-xl q-mb-md">
-        <div class="text-h3">
-          Summify
-        </div>
-        <div class="text-subtitle1">
-          Condense your productivity
-        </div>
+        <div class="text-h3">Summify</div>
+        <div class="text-subtitle1">Condense your productivity</div>
       </div>
     </q-header>
 
@@ -49,7 +45,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 // import EssentialLink from 'components/EssentialLink.vue'
 
 // const linksList = [
@@ -98,7 +94,7 @@ import { defineComponent } from 'vue'
 // ]
 
 export default defineComponent({
-  name: 'MainLayout'
+  name: "MainLayout",
 
   // components: {
   //   EssentialLink
@@ -115,5 +111,5 @@ export default defineComponent({
   //     }
   //   }
   // }
-})
+});
 </script>
