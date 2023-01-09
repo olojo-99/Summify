@@ -1,1 +1,37 @@
 // app global css in SCSS form
+.flex-item {
+  flex: 1 1 20%;
+}
+
+#main-container {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
+  display: flex;
+}
+
+#content {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+// #left,
+// #middle,
+// #right {
+//   flex: 1 1 30%;
+// }
+
+#left {
+  flex-grow: 1;
+}
+
+
+#middle {
+  margin-right: 10%;
+  margin-left: 10%;
+  flex-grow: 5;
+}
+
+#right {
+  flex-grow: 1;
+}

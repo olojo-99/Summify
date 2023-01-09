@@ -1,5 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page
+id="main-container"
+class="flex">
     <div v-if="sum == false">
       <q-form
         id="url_submission"
@@ -20,18 +22,41 @@
           color="primary" />
       </q-form>
     </div>
-    <div v-else>
-      <div id="video-embed"><iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/U_gANjtv28g"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+
+    <div
+v-else
+id="content"
+class="flex row">
+      <div
+        id="left"
+        class="flex-item">
       </div>
-      <div id="transcript-text"></div>
-      <div id="links"></div>
+      <div
+        id="middle"
+        class="flex-item">
+        <div id="video-embed"><iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/U_gANjtv28g"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <div id="transcript-text">
+          <h1 class="text-h1">Summary</h1>
+          <p class="text-body1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos unde dolores possimus maxime nihil officiis expedita repellat voluptatibus alias? Quod sed amet magni beatae error quidem ipsam nostrum vitae officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit fugiat voluptates perferendis aperiam rem consequuntur placeat, corrupti sit quod, itaque quam rerum? Aut illo deserunt quidem earum, magnam doloribus veritatis! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam reiciendis consequuntur expedita odio, error asperiores, vel, quibusdam beatae non recusandae eveniet. Aliquid quas vero aut, dignissimos labore aliquam ducimus tempore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ipsum aliquid ullam eum atque rem cum voluptatibus magni aliquam eius optio totam laudantium, saepe doloremque corrupti necessitatibus dolor repellat blanditiis?</p>
+        </div>
+      </div>
+
+      <div
+        id="right"
+        class="flex-item">
+        <div id="links">
+          <q-card>Link 1</q-card>
+          <q-card>Link 2</q-card>
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
