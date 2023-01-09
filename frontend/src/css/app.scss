@@ -15,11 +15,21 @@
   align-items: flex-start;
 }
 
-// #left,
-// #middle,
-// #right {
-//   flex: 1 1 30%;
-// }
+#search-container {
+  user-select: none;
+}
+
+
+#description {
+  margin-top: 6%;
+}
+
+#search-bar {
+  flex-grow: 6;
+}
+
+
+
 
 #left {
   flex-grow: 1;
@@ -32,6 +42,23 @@
   flex-grow: 5;
 }
 
+
+
+
+// right column of content
+
+
 #right {
   flex-grow: 1;
+}
+
+.q-card {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  width: 120px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }

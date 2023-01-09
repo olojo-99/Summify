@@ -1,32 +1,46 @@
 <template>
   <q-page
-id="main-container"
-class="flex">
-    <div v-if="sum == false">
-      <q-form
-        id="url_submission"
-        @submit.prevent>
-        <q-input
-          v-model="url"
-          name="video_url"
-          filled
-          type="url"
-          outlined
-          label="Insert Video URL"
-        />
-        <q-btn
+    id="main-container"
+    class="flex">
+    <div
+      v-if="sum == false"
+      id="search-container"
+      class="flex flex-center flex-item column">
+      <div
+        id="description"
+        class="flex-item">
+        <p>Summify is a free study tool.</p>
+        <p>Enter a longform Youtube link (eg. https://www.youtube.com/watch?v=dQw4w9WgXcQ)</p>
+        <p>Videos that do not have captions or have captions turned off by the author will not work.</p>
+      </div>
 
-          id="submit-button"
-          label="Submit"
-          type="submit"
-          color="primary" />
-      </q-form>
+      <div
+        id="search-bar"
+        class="flex-item">
+        <q-form
+          id="url_submission"
+          @submit.prevent>
+          <q-input
+            v-model="url"
+            name="video_url"
+            filled
+            type="url"
+            outlined
+            label="Insert Video URL"
+          />
+          <q-btn
+            id="submit-button"
+            label="Submit"
+            type="submit"
+            color="primary" />
+        </q-form>
+      </div>
     </div>
 
     <div
-v-else
-id="content"
-class="flex row">
+      v-else
+      id="content"
+      class="flex row">
       <div
         id="left"
         class="flex-item">
@@ -53,8 +67,43 @@ class="flex row">
         id="right"
         class="flex-item">
         <div id="links">
-          <q-card>Link 1</q-card>
-          <q-card>Link 2</q-card>
+<a
+href="http://www.google.com"
+target="_blank">
+          <q-card
+            class="q-pt-none"
+            flat
+            bordered
+            square>
+            <q-card-section>
+              <q-img src="https://picsum.photos/100/100"></q-img>
+            </q-card-section>
+
+            <q-card-section>
+              example.com
+            </q-card-section>
+          </q-card>
+
+</a>
+
+<a
+href="http://www.google.com"
+target="_blank">
+          <q-card
+            class="q-pt-none"
+            flat
+            bordered
+            square>
+            <q-card-section>
+              <q-img src="https://picsum.photos/100/100"></q-img>
+            </q-card-section>
+
+            <q-card-section>
+              example.com
+            </q-card-section>
+          </q-card>
+</a>
+
         </div>
       </div>
     </div>
