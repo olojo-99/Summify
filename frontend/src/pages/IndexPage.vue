@@ -48,7 +48,8 @@
       <div
         id="middle"
         class="flex-item">
-        <div id="video-embed"><iframe
+        <div id="video-embed">
+          <iframe
             width="560"
             height="315"
             src="https://www.youtube.com/embed/U_gANjtv28g"
