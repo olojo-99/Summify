@@ -16,7 +16,7 @@ def index():
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=generate_prompt(extract),
-            temperature=0.7,
+            temperature=0.6,
             max_tokens=1000,
         )
         # redirect the user to the URL for the index page (/) with URL result parameter passed
