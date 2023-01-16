@@ -6,7 +6,7 @@ from flask import Flask, redirect, render_template, request, url_for
 app = Flask(__name__) # creating instance of flask app with same name as file
 
 # create and add a new api key from https://beta.openai.com/account/api-keys
-openai.api_key = None
+openai.api_key = "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"
 
 # add route decorator for index func, which specifies what is returned at index route
 @app.route("/", methods=("GET", "POST"))
