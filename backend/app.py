@@ -1,10 +1,11 @@
 import os
 import openai
 from flask import Flask, redirect, render_template, request, url_for
+from flask_cors import CORS
 
 
 app = Flask(__name__) # creating instance of flask app with same name as file
-
+CORS(app)
 # # create and add a new api key from https://beta.openai.com/account/api-keys
 # openai.api_key = "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"
 
@@ -37,7 +38,7 @@ app = Flask(__name__) # creating instance of flask app with same name as file
 
 @app.route("/")
 def hello():
-    return "Hello"
+    return "This text is returned from the backend"
 
 if __name__ == "__main__":
     app.run()
