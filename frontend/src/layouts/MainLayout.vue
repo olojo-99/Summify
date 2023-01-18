@@ -11,8 +11,16 @@
           @click="toggleLeftDrawer"
         />
       </q-toolbar> -->
+      <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap" rel="stylesheet">  -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Quicksand&display=swap" rel="stylesheet">
 
-      <div class="q-px-lg q-pt-xl q-mb-md">
+
+
+      <div id="header-container">
         <div class="text-h3">Summify</div>
         <div class="text-subtitle1">Condense your productivity</div>
       </div>

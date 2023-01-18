@@ -13,12 +13,12 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^1.2.2",
-    "quasar": "^2.6.0",
+    "quasar": "^2.11.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
-    "@quasar/app-vite": "^1.0.0",
+    "@quasar/app-vite": "^1.2.0",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",

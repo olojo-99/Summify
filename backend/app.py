@@ -38,7 +38,7 @@ CORS(app)
 
 @app.route("/")
 def hello():
-    return "This text is returned from the backend"
+    return "Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum "
 
 if __name__ == "__main__":
     app.run()

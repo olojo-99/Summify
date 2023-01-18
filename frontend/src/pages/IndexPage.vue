@@ -157,7 +157,8 @@ function switchState() {
       .then((response) => {
         console.log(response)
         summary.value = response.data
-      }).then(() => {
+      })
+      .then(() => {
         console.log(summary)
         var sum_text = document.getElementById("summary-body")
       }
