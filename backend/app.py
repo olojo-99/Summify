@@ -1,10 +1,10 @@
 import os
 import openai
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, jsonify
 from flask_cors import CORS
 
 
-app = Flask(__name__) # creating instance of flask app with same name as file
+app = Flask(__name__)  # creating instance of flask app with same name as file
 CORS(app)
 # # create and add a new api key from https://beta.openai.com/account/api-keys
 # openai.api_key = "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"
@@ -35,10 +35,28 @@ CORS(app)
 #     return f"Create a summary of the following extract from a video transcript:\n\n{extract}"
 
 
-
 @app.route("/")
 def hello():
-    return "Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum Lorem ipsum jipsum in my assssum "
+    return {
+        "text": {
+            "sub":
+            {
+                "00:00 - 00:05": "summary1",
+                "00:05 - 00:10": "summary2",
+                "00:10 - 00:15": "summary2",
+            },
+            "overall": "main",
+        },
+
+        "links": {
+            "IR": [
+                "http://youtube.com",
+                "http://facebook.com",
+                "url3"
+            ]
+        }
+    }
+
 
 if __name__ == "__main__":
     app.run()
