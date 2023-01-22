@@ -3,16 +3,50 @@
   flex: 1 1 20%;
 }
 
+
+header {
+  z-index: 99;
+  padding: 0%;
+}
+
+#header-container {
+  height: 17em;
+}
+
+.text-h3 {
+  // font-family: 'Montserrat Alternates', sans-serif;
+  height: 100%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15em;
+  overflow: hidden;
+  position: absolute;
+  display: inline-block;
+  padding-top: 0.32em;
+}
+
+.text-subtitle1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2em;
+  padding-left: 4em;
+  position: absolute;
+  height: 100%;
+  padding-top: 6.5em;
+  overflow: visible;
+}
+
+
 #main-container {
   // margin-left: 10%;
   // margin-right: 10%;
   margin-top: 2%;
   display: flex;
+  z-index: 2;
 }
 
 #content {
   flex-direction: row;
   align-items: flex-start;
+  width: 100%;
 }
 
 #search-container {
@@ -32,14 +66,14 @@
 
 
 #left {
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 
 #middle {
   margin-right: 10%;
   margin-left: 10%;
-  flex-grow: 5;
+  flex-grow: 3;
 }
 
 
@@ -49,7 +83,7 @@
 
 
 #right {
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 .q-card {

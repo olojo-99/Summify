@@ -60,7 +60,9 @@
         </div>
         <div id="transcript-text">
           <h1 class="text-h1">Summary</h1>
-          <p class="text-body1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos unde dolores possimus maxime nihil officiis expedita repellat voluptatibus alias? Quod sed amet magni beatae error quidem ipsam nostrum vitae officiis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit fugiat voluptates perferendis aperiam rem consequuntur placeat, corrupti sit quod, itaque quam rerum? Aut illo deserunt quidem earum, magnam doloribus veritatis! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam reiciendis consequuntur expedita odio, error asperiores, vel, quibusdam beatae non recusandae eveniet. Aliquid quas vero aut, dignissimos labore aliquam ducimus tempore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ipsum aliquid ullam eum atque rem cum voluptatibus magni aliquam eius optio totam laudantium, saepe doloremque corrupti necessitatibus dolor repellat blanditiis?</p>
+          <p
+            id="summary-body"
+            class="text-body1">{{ text }}</p>
         </div>
       </div>
 
@@ -69,7 +71,8 @@
         class="flex-item">
         <div id="links">
 <a
-href="http://www.google.com"
+id="link1"
+v-bind:href="link1"
 target="_blank">
           <q-card
             class="q-pt-none"
@@ -81,14 +84,15 @@ target="_blank">
             </q-card-section>
 
             <q-card-section>
-              example.com
+              {{  link1  }}
             </q-card-section>
           </q-card>
 
 </a>
 
 <a
-href="http://www.google.com"
+id="link2"
+v-bind:href="link2"
 target="_blank">
           <q-card
             class="q-pt-none"
@@ -100,7 +104,7 @@ target="_blank">
             </q-card-section>
 
             <q-card-section>
-              example.com
+              {{  link2  }}
             </q-card-section>
           </q-card>
 </a>
@@ -113,8 +117,14 @@ target="_blank">
 
 <script>
 import { defineComponent, ref } from "vue";
-// import { api } from 'boot/axios'
+import axios, { api } from 'boot/axios'
 // import { useQuasar } from 'quasar'
+// import { response } from "express";
+// import { data } from "browserslist";
+
+
+
+
 // const urlSubmission = document.getElementById('url_submission')
 // function submitForm (event) {
 //   event.preventDefault()
@@ -132,7 +142,12 @@ import { defineComponent, ref } from "vue";
 function init() {
   var button = document.getElementById('submit-button');
   button.addEventListener("click", switchState);
+
 }
+
+var summary = ref();
+var link1 = ref();
+var link2 = ref();
 
 window.onload = init;
 
@@ -140,18 +155,50 @@ window.onload = init;
 const summary_ready = ref(false);
 
 function switchState() {
-  console.log("lol");
+  console.log("state switched to summary screen");
   summary_ready.value = true;
+  getData()
+  // api.get('http://127.0.0.1:5000')
+  //     .then((response) => {
+  //       console.log(response)
+  //       summary.value = response.data
+  //     })
+  //     .then(() => {
+  //       console.log(summary)
+  //       var sum_text = document.getElementById("summary-body")
+  //     }
+  //     )
 }
+
+
+
+const getData = async () => {
+  const response = await api.get('http://127.0.0.1:5000')
+  console.log(response)
+  const data = response.data
+  console.log(data)
+  summary.value = data.text.overall
+  link1.value = data.links.IR[0]
+  link2.value = data.links.IR[1]
+}
+
+
+
 
 
 export default {
   data() {
     return {
-      sum: summary_ready
+      sum: summary_ready,
+      text: summary,
+      link1: link1,
+      link2: link2
     };
   }
-};
+
+}
+
+;
 
 
 // export default defineComponent({
