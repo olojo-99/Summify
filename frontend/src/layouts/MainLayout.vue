@@ -1,6 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header>
+    <q-header
+    id="header">
       <!-- <q-toolbar>
         <q-btn
           flat
@@ -20,10 +21,8 @@
 
 
 
-      <div id="header-container">
-        <div class="text-h3">Summify</div>
-        <div class="text-subtitle1">Condense your productivity</div>
-      </div>
+        <div id="title" class="text-h3">Summify</div>
+        <div id="flavour" class="text-subtitle1">Condense your productivity</div>
     </q-header>
 
     <!-- <q-drawer

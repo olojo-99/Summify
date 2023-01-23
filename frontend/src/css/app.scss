@@ -4,19 +4,23 @@
 }
 
 
-header {
-  z-index: 99;
-  padding: 0%;
+#header, #title, #flavour {
+  transition: 0.2s;
+  font-family: 'Quicksand', sans-serif;
+  user-select: none;
 }
 
-#header-container {
+
+#header {
+  z-index: 99;
+  padding: 0%;
   height: 17em;
 }
 
-.text-h3 {
+
+#title {
   // font-family: 'Montserrat Alternates', sans-serif;
   height: 100%;
-  font-family: 'Quicksand', sans-serif;
   font-size: 15em;
   overflow: hidden;
   position: absolute;
@@ -24,8 +28,7 @@ header {
   padding-top: 0.32em;
 }
 
-.text-subtitle1 {
-  font-family: 'Quicksand', sans-serif;
+#flavour {
   font-size: 2em;
   padding-left: 4em;
   position: absolute;
@@ -41,12 +44,16 @@ header {
   margin-top: 2%;
   display: flex;
   z-index: 2;
+  transition: height 0.3s ease-out;
 }
 
 #content {
+  transition: 0.4s;
+  padding-top: 2em;
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
+  transition: height 0.3s ease-out;
 }
 
 #search-container {

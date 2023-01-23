@@ -41,10 +41,14 @@
       v-else
       id="content"
       class="flex row">
+
+      <!-- left column -->
       <div
         id="left"
         class="flex-item">
       </div>
+
+      <!-- middle column -->
       <div
         id="middle"
         class="flex-item">
@@ -65,6 +69,8 @@
             class="text-body1">{{ text }}</p>
         </div>
       </div>
+
+      <!-- right column -->
 
       <div
         id="right"
@@ -150,6 +156,7 @@ var link1 = ref();
 var link2 = ref();
 
 window.onload = init;
+window.onscroll = scroll;
 
 
 const summary_ready = ref(false);
@@ -168,6 +175,33 @@ function switchState() {
   //       var sum_text = document.getElementById("summary-body")
   //     }
   //     )
+}
+
+
+function scroll () {
+  let title = document.getElementById("title")
+  let flavour = document.getElementById("flavour")
+  let header = document.getElementById("header")
+  // scrolling down
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    title.style.fontSize = "1.5em";
+    title.style.paddingTop = "0.0em";
+    title.style.paddingLeft = "0.2em";
+    title.style.lineHeight = "1.5em";
+    flavour.style.fontSize = "0em";
+    flavour.style.opacity = "0.0";
+    header.style.height = "2.5em";
+  }
+  // scrolling up
+  else {
+    header.style.height = "17em";
+    title.style.fontSize = "15em";
+    title.style.paddingTop = "0.32em";
+    title.style.lineHeight = "3.125rem";
+    title.style.paddingLeft = "0em";
+    flavour.style.fontSize = "2em";
+    flavour.style.opacity = "0.7";
+  }
 }
 
 
