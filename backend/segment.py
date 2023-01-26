@@ -6,10 +6,7 @@ from datetime import timedelta
 # URL is used to fetch transcript summary and is segmented
 
 
-def segment_transcript(url):
-    # "https://www.youtube.com/watch?v=rjYUeh3tlpc"
-
-    vid_id = url  # chars 2-13 of 2nd list item
+def segment_transcript(vid_id):
 
     # SRT format is then obtained through YT transcript API
     srt = YouTubeTranscriptApi.get_transcript(vid_id)

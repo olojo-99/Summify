@@ -259,10 +259,10 @@ const getData = async id => {
                 const data = response.data
                 console.log(data)
 
-                console.log(data.text.sub)
-                summary.value = data.text.overall
+                console.log(data.sub)
+                summary.value = data.overall
 
-                subs.value = data.text.sub
+                subs.value = data.sub
                 console.log(subs.value)
                 summary_ready.value = true;
                 // insertSubs(data.text.sub)
