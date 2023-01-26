@@ -51,7 +51,7 @@ def transcript_summary(vid_id):
 # Links will be based on Fact Extraction on summarised segments
 
 # Returns list of Google links
-@app.route("/links/<vid_id>", methods=["GET"])
+@app.route("/links", methods=["GET"])
 def ir_links():
     return "Information Retrieval Links"
 
