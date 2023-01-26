@@ -10,7 +10,7 @@ from video_info import manual_transcript
 
 
 # OpenAI API key hidden in environment variable file
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__)  # creating instance of flask app with same name as file
 CORS(app)  # activate cors
@@ -25,7 +25,7 @@ def transcript_summary(vid_id):
 
     # Parse request vid_id from video vid_id
     # vid_id = request.base_url.split("/")[-1] # for parsing full vid URL
-    # vid_id = "https://www.youtube.com/watch?v=Unl1jXFnzgo" # MANUAL TRANSCRIPT
+    # vid_id = "https://www.youtube.com/watch?v=Unl1jXFnzgo"  # MANUAL TRANSCRIPT
 
     # Create dict of timestamps and matching transcript segment
     vid_segments = segment_transcript(vid_id)
