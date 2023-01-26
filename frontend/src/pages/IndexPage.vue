@@ -20,7 +20,8 @@
         id="search-bar"
         class="flex-item">
         <q-form
-          ref="formComponent">
+          ref="formComponent"
+          @submit.prevent>
           <div id="bar-button">
           <q-input
             v-model="id"
@@ -78,10 +79,25 @@
 
         <div id="transcript-text">
           <h1 class="text-h1">Summary</h1>
+          <h2>General:</h2>
           <p
             id="summary-body"
-            class="text-body1">{{ text }}</p>
+            class="text-body1">{{ text }}
+          </p>
+
+          <h2>5 Minute Segments:</h2>
+
+
+            <div id="sub-summaries" class="text-body1">
+              <div v-for="(value, key) in subs"  v-bind:key="key">
+                <span class="timestamp">{{ key }}: </span>{{ value }}
+              </div>
+            </div>
+
+
+
         </div>
+
       </div>
 
       <!-- right column -->
@@ -158,6 +174,7 @@ import {LoadingBar, Loading, QSpinnerGears} from 'quasar'
     var summary = ref(null);
     var link1 = ref(null);
     var link2 = ref(null);
+    var subs = ref(null)
     var URL_BASE = "http://127.0.0.1:5000"
     const summary_ready = ref(false);
     const links_ready = ref(false)
@@ -197,6 +214,37 @@ import {LoadingBar, Loading, QSpinnerGears} from 'quasar'
     // }
 
 
+// function insertSubs(data) {
+
+//   const timestaps = Object.keys(data)
+//   const summaries = Object.values(data)
+//   const container = document.createElement("div")
+//   container.id = "sub-summaries"
+//   console.log(timestaps)
+//   for (let i = 0; i < timestaps.length; i++) {
+//     let div = document.createElement("div")
+//     div.className = "sub-container"
+
+//     let tag = document.createElement("p")
+//     tag.className = "timestamp"
+
+//     let sub = document.createElement("p")
+//     sub.className = "sub"
+
+//     tag.innerHTML = timestaps[i]
+//     sub.innerHTML = summaries[i]
+
+//     div.appendChild(tag)
+//     div.appendChild(sub)
+
+//     container.appendChild(div)
+//   }
+//   console.log(container)
+//   subs.value = container
+// }
+
+
+
 
 const getData = async id => {
   Loading.show({
@@ -211,8 +259,14 @@ const getData = async id => {
       console.log(response)
       const data = response.data
       console.log(data)
+
+      console.log(data.text.sub)
       summary.value = data.text.overall
+
+  subs.value = data.text.sub
+      console.log(subs.value)
       summary_ready.value = true;
+      // insertSubs(data.text.sub)
       Loading.hide()
 }
 
@@ -265,6 +319,7 @@ export default {
     return {
       id,
       bar,
+      subs,
       trigger,
       get_id,
       embed_id,

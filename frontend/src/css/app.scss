@@ -88,10 +88,17 @@
 }
 
 
+#left,
+#middle,
+#right {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
 
 
 #left {
-  flex-grow: 3;
+  flex-grow: 2;
   text-align: center;
   position: sticky;
   top: 6em;
@@ -103,6 +110,15 @@
 #middle {
   flex-grow: 3;
 }
+
+// #sub-summaries {
+//   font-size: 1.2em;
+// }
+
+.timestamp {
+  color: #e28b00;
+}
+
 
 #video-embed {
   align-items: center;
