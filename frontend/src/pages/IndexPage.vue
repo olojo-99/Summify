@@ -162,7 +162,7 @@ target="_blank">
 <script>
 import { defineComponent, ref } from "vue";
 import axios, { api } from 'boot/axios'
-import {LoadingBar, Loading, QSpinnerGears} from 'quasar'
+import {Loading, Notify} from 'quasar'
 
 // function init() {
     //   var button = document.getElementById('submit-button');
@@ -244,31 +244,36 @@ import {LoadingBar, Loading, QSpinnerGears} from 'quasar'
 // }
 
 
-
-
 const getData = async id => {
-  Loading.show({
-    message: "Generating summary",
-    backgroundColor: "grey-4",
-    customClass: "loading",
-    spinnerColor: "accent",
-    messageColor: "black"
-  })
-      console.log(id)
-      const response = await api.get(URL_BASE + "/summary/" + id)
-      console.log(response)
-      const data = response.data
-      console.log(data)
+              Loading.show({
+                message: "Generating summary",
+                backgroundColor: "grey-4",
+                customClass: "loading",
+                spinnerColor: "accent",
+                messageColor: "black"
+              })
+              try {
+                console.log(id)
+                const response = await api.get(URL_BASE + "/summarise/" + id)
+                console.log(response)
+                const data = response.data
+                console.log(data)
 
-      console.log(data.text.sub)
-      summary.value = data.text.overall
+                console.log(data.text.sub)
+                summary.value = data.text.overall
 
-  subs.value = data.text.sub
-      console.log(subs.value)
-      summary_ready.value = true;
-      // insertSubs(data.text.sub)
-      Loading.hide()
-}
+                subs.value = data.text.sub
+                console.log(subs.value)
+                summary_ready.value = true;
+                // insertSubs(data.text.sub)
+              }
+              catch (error) {
+                console.log("REEEEEEE")
+                Notify.create("The request has failed. i'm truly sorry.")
+              }
+                  Loading.hide()
+            }
+
 
 
 const getLinks = async id => {
@@ -283,39 +288,44 @@ const getLinks = async id => {
 
 export default {
   setup() {
+
     const bar = ref(null)
 
-    function get_id(url_link) {
-      if (url_link.includes("youtube")) {
-        // full url
-        let last_slash = url_link.lastIndexOf("v=")
-        return url_link.slice(last_slash + 2)
-      }
-      else if (url_link.includes("youtu.be")) {
-        let last_slash = url_link.lastIndexOf("/")
-        return url_link.slice(last_slash)
-      }
-      else {
-        return false
-      }
-    }
+          function get_id(url_link) {
+            if (url_link.includes("youtube")) {
+              // full url
+              let last_slash = url_link.lastIndexOf("v=")
+              return url_link.slice(last_slash + 2)
+            }
+            else if (url_link.includes("youtu.be")) {
+              let last_slash = url_link.lastIndexOf("/")
+              return url_link.slice(last_slash)
+            }
+            else {
+              return false
+            }
+          }
 
-    function embed_id(vid_id) {
-      return "https://www.youtube.com/embed/" + vid_id
-    }
+          function embed_id(vid_id) {
+            return "https://www.youtube.com/embed/" + vid_id
+          }
 
 
-    function trigger() {
-      const barRef = bar.value
-      barRef.start()
+          function trigger() {
+            const barRef = bar.value
+            barRef.start()
 
-      setTimeout(() => {
-        const barRef = bar.value
-        if (barRef) {
-          barRef.stop()
-        }
-      }, Math.random() * 5000 + 1000)
-    }
+            setTimeout(() => {
+              const barRef = bar.value
+              if (barRef) {
+                barRef.stop()
+              }
+            }, Math.random() * 5000 + 1000)
+          }
+
+
+
+
     return {
       id,
       bar,
@@ -328,6 +338,7 @@ export default {
       link1: link1,
       link2: link2,
       links: links_ready,
+
       onSubmit() {
         console.log("submit button pressed")
         const vid_id = get_id(id.value)
@@ -337,11 +348,12 @@ export default {
           getLinks(vid_id)
         }
         else {
-
+          // error handling here
         }
-
-        // add links_ready part of page
       }
+
+
+
     };
   }
 };

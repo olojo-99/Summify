@@ -1,68 +1,91 @@
 import os
 import openai
-import time
-from flask import Flask, redirect, render_template, request, url_for, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
+from segment import segment_transcript
+from rewrite import rewrite_segment
+from summarise import sub_summarise
+from overall import meta_summarise
+from video_info import manual_transcript
 
+
+# OpenAI API key hidden in environment variable file
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__)  # creating instance of flask app with same name as file
-CORS(app)
-# # create and add a new api key from https://beta.openai.com/account/api-keys
-# openai.api_key = "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"
-
-# # add route decorator for index func, which specifies what is returned at index route
-# @app.route("/", methods=("GET", "POST"))
-# def index():
-#     if request.method == "POST":
-#         extract = request.form["transcript"]
-#         response = openai.Completion.create(
-#             model="text-davinci-003",
-#             prompt=generate_prompt(extract),
-#             temperature=0.6,
-#             max_tokens=1000,
-#         )
-#         # redirect the user to the URL for the index page (/) with URL result parameter passed
-#         # may want to find method for hiding result param within URL
-#         return redirect(url_for("index", result=response.choices[0].text))
+CORS(app)  # activate cors
 
 
-#     summary = request.args.get("result") # obtain summary result from URL param dict
-#     print(f'\n\n{summary}\n\n') # print to CLI for debugging
-#     return render_template("index.html", result=summary) # render HTML page with result in div
+# GET request from Frontend will contain video id in request vid_id
+# Full video URL needs to be parsed on frontend
+
+# Return Timestamp/Segment pairs + Overall summary
+@app.route("/summarise/<vid_id>", methods=["GET"])
+def transcript_summary(vid_id):
+
+    # Parse request vid_id from video vid_id
+    # vid_id = request.base_url.split("/")[-1] # for parsing full vid URL
+    # vid_id = "https://www.youtube.com/watch?v=Unl1jXFnzgo" # MANUAL TRANSCRIPT
+
+    # Create dict of timestamps and matching transcript segment
+    vid_segments = segment_transcript(vid_id)
+
+    # Rewrite segments if auto-generated transcript
+    if manual_transcript(vid_id):
+        vid_segments = {stamp: rewrite_segment(
+            vid_segments[stamp]) for stamp in vid_segments}
+
+    # Summarise segments of video transcript
+    vid_segments = {stamp: sub_summarise(
+        vid_segments[stamp]) for stamp in vid_segments}
+
+    # Generate overall summary based on summarised segments
+    ovr_summary = meta_summarise("\n".join(vid_segments.values()))
+
+    return jsonify(
+        segments=vid_segments,
+        overall=ovr_summary)
 
 
-# # prompt is specified in docstring and passed to model
-# def generate_prompt(extract):
-#     return f"Create a summary of the following extract from a video transcript:\n\n{extract}"
+# GET request from Frontend for Google links will have no data
+# Links will be based on Fact Extraction on summarised segments
+
+# Returns list of Google links
+@app.route("/links/<vid_id>", methods=["GET"])
+def ir_links():
+    return "Information Retrieval Links"
+
+# @app.route("/summary/<id>")
+# def hello(id):
+#     time.sleep(1)
+#     return {
+#         "text": {
+#             "sub":
+#             {
+#                 "00:00 - 00:05": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
+#                 "00:05 - 00:10": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
+#                 "00:10 - 00:15": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
+#             },
+#             "overall": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
+#         }
+#     }
 
 
-@app.route("/summary/<id>")
-def hello(id):
-    time.sleep(1)
-    return {
-        "text": {
-            "sub":
-            {
-                "00:00 - 00:05": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
-                "00:05 - 00:10": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
-                "00:10 - 00:15": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
-            },
-            "overall": "t big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text big chunk of text ",
-        }
-    }
+# @app.route("/links/<id>")
+# def goodbye(id):
+#     time.sleep(5)
+#     return {"links": {
+#             "IR": [
+#                 id,
+#                 id,
+#                 id
+#             ]
+#             }}
 
 
-@app.route("/links/<id>")
-def goodbye(id):
-    time.sleep(5)
-    return {"links": {
-            "IR": [
-                id,
-                id,
-                id
-            ]
-            }}
+# if __name__ == "__main__":
 
+# Run application
+if __name__ == '__main__':
 
-if __name__ == "__main__":
     app.run()
