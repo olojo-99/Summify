@@ -67,7 +67,7 @@
 
 #content {
   transition: 0.4s;
-  padding-top: 2em;
+  // padding-top: 2em;
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
@@ -138,8 +138,13 @@
 
 #links {
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+
+}
+
+#link-container {
+  text-align: center;
 }
 
 .q-card {
@@ -151,6 +156,9 @@
 a {
   color: black;
   text-decoration: none;
+  display: inline-block;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
 }
 
 

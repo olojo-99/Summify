@@ -70,51 +70,42 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
-      </div>
-
-      <!-- middle column -->
-      <div
-        id="middle"
-        class="flex-item">
-
-        <div id="transcript-text">
-          <h1 class="text-h1">Summary</h1>
-          <h2>General:</h2>
-          <p
-            id="summary-body"
-            class="text-body1">{{ text }}
-          </p>
-
-          <h2>5 Minute Segments:</h2>
 
 
-            <div id="sub-summaries" class="text-body1">
-              <div v-for="(value, key) in subs"  v-bind:key="key">
-                <span class="timestamp">{{ key }}: </span>{{ value }}
-              </div>
-            </div>
-
-
-
-        </div>
-
-      </div>
-
-      <!-- right column -->
-      <div v-if="links == false" id="right"
-      class="flex-items">
-      <q-spinner color="accent"
-        size="10em"/>
-        <h5 class="text-h5">Retrieving information from summary: Generating links</h5>
+        <div v-if="links_ready == false" id="right"
+          class="flex-items">
+          <q-spinner color="accent"
+            size="10em"/>
+            <h5 class="text-h5">Retrieving information from summary: Generating links</h5>
 
 
     </div>
       <div
       v-else
-        id="right"
-        class="flex-item">
-        <div id="links">
-<a
+        id="links"
+        >
+        <div id="link-container">
+
+
+<a v-for="link in links" v-bind:key="link"
+:href="link.URL"
+target="_blank">
+<q-card
+class="q-pt-none"
+flat
+bordered
+square
+>
+<q-card-section>
+  <img :src="link.icon" width="16" height="16">
+</q-card-section>
+<q-card-section>
+  {{ link.title }}
+</q-card-section>
+</q-card>
+</a>
+          
+<!-- <a
 id="link1"
 v-bind:href="link1"
 target="_blank">
@@ -151,10 +142,42 @@ target="_blank">
               {{  link2  }}
             </q-card-section>
           </q-card>
-</a>
+</a> -->
 
         </div>
       </div>
+      </div>
+
+      <!-- middle column -->
+      <div
+        id="middle"
+        class="flex-item">
+
+        <div id="transcript-text">
+          <h1 class="text-h1">Summary</h1>
+          <h2>General:</h2>
+          <p
+            id="summary-body"
+            class="text-body1">{{ text }}
+          </p>
+
+          <h2>5 Minute Segments:</h2>
+
+
+            <div id="sub-summaries" class="text-body1">
+              <div v-for="(value, key) in subs"  v-bind:key="key">
+                <span class="timestamp">{{ key }}: </span>{{ value }}
+              </div>
+            </div>
+
+
+
+        </div>
+
+      </div>
+
+      <!-- right column -->
+      
     </div>
   </q-page>
 </template>
@@ -162,18 +185,13 @@ target="_blank">
 <script>
 import { defineComponent, ref } from "vue";
 import axios, { api } from 'boot/axios'
-import {Loading, Notify} from 'quasar'
+import {Loading, Notify, QSpinnerGears} from 'quasar'
 
-// function init() {
-    //   var button = document.getElementById('submit-button');
-    //   button.addEventListener("click", switchState);
-    // }
 
     const refComponent = ref(null)
     const id = ref(null)
     var summary = ref(null);
-    var link1 = ref(null);
-    var link2 = ref(null);
+    var links = ref(null);
     var subs = ref(null)
     var URL_BASE = "http://127.0.0.1:5000"
     const summary_ready = ref(false);
@@ -209,50 +227,19 @@ import {Loading, Notify} from 'quasar'
       }
     }
 
-    // function switchState() {
-    //   console.log("state switched to summary screen");
-    // }
-
-
-// function insertSubs(data) {
-
-//   const timestaps = Object.keys(data)
-//   const summaries = Object.values(data)
-//   const container = document.createElement("div")
-//   container.id = "sub-summaries"
-//   console.log(timestaps)
-//   for (let i = 0; i < timestaps.length; i++) {
-//     let div = document.createElement("div")
-//     div.className = "sub-container"
-
-//     let tag = document.createElement("p")
-//     tag.className = "timestamp"
-
-//     let sub = document.createElement("p")
-//     sub.className = "sub"
-
-//     tag.innerHTML = timestaps[i]
-//     sub.innerHTML = summaries[i]
-
-//     div.appendChild(tag)
-//     div.appendChild(sub)
-
-//     container.appendChild(div)
-//   }
-//   console.log(container)
-//   subs.value = container
-// }
 
 
 const getData = async id => {
-              Loading.show({
-                message: "Generating summary",
-                backgroundColor: "grey-4",
-                customClass: "loading",
-                spinnerColor: "accent",
-                messageColor: "black"
-              })
+              
               try {
+                Loading.show({
+                message: "Generating summary",
+                backgroundColor: "black",
+                customClass: "loading",
+                spinnerColor: "white",
+                messageColor: "white",
+                boxClass: "bg-amber text-white"
+              })
                 console.log(id)
                 const response = await api.get(URL_BASE + "/summarise/" + id)
                 console.log(response)
@@ -262,29 +249,41 @@ const getData = async id => {
                 console.log(data.sub)
                 summary.value = data.overall
 
-                subs.value = data.sub
+                subs.value = data.segments
                 console.log(subs.value)
                 summary_ready.value = true;
                 // insertSubs(data.text.sub)
+                Loading.hide()
+
+                console.log('getting links')
+                const response2 = await api.get(URL_BASE + "/links/" + id)
+                console.log(response)
+                const data2 = response2.data
+                links.value = data2.links
+                links_ready.value = true;
+
+
+                
               }
               catch (error) {
                 console.log("REEEEEEE")
                 Notify.create("The request has failed. i'm truly sorry.")
+                Loading.hide()
               }
-                  Loading.hide()
+                  // Loading.hide()
             }
 
 
 
-const getLinks = async id => {
-      console.log(id)
-      const response = await api.get(URL_BASE + "/links/" + id)
-      console.log(response)
-      const data = response.data
-      link1.value = data.links.IR[0]
-      link2.value = data.links.IR[1]
-      links_ready.value = true;
-    }
+// const getLinks = async id => {
+//       console.log('getting links')
+//       const response = await api.get(URL_BASE + "/links/" + id)
+//       console.log(response)
+//       const data = response.data
+//       link1.value = data.IR[0]
+//       link2.value = data.IR[1]
+//       links_ready.value = true;
+//     }
 
 export default {
   setup() {
@@ -320,7 +319,7 @@ export default {
               if (barRef) {
                 barRef.stop()
               }
-            }, Math.random() * 5000 + 1000)
+            }, Math.random() * 300 + 100)
           }
 
 
@@ -335,9 +334,10 @@ export default {
       embed_id,
       sum: summary_ready,
       text: summary,
-      link1: link1,
-      link2: link2,
-      links: links_ready,
+      // link1: link1,
+      // link2: link2,
+      links,
+      links_ready,
 
       onSubmit() {
         console.log("submit button pressed")
@@ -345,7 +345,8 @@ export default {
         if (vid_id) {
           trigger()
           getData(vid_id)
-          getLinks(vid_id)
+          // getLinks(vid_id)
+          
         }
         else {
           // error handling here

@@ -1,5 +1,6 @@
 import os
 import openai
+import time
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_caching import Cache
@@ -63,8 +64,26 @@ def transcript_summary(vid_id):
 @cache.cached(timeout=300) # caching IR results
 def ir_links(vid_id):
     # get cached overall summary for video
+    time.sleep(3)
     ovr_summary = cache.get(vid_id)
-    return jsonify(ovr_summary)
+    return {
+    "links":
+        [{"title": "Google",
+          "URL": "http://www.google.com",
+          "icon": "http://www.google.com/favicon.ico"
+          },
+         {
+             "title": "Facebook",
+             "URL": "http://www.facebook.com",
+             "icon": "http://www.facebook.com/favicon.ico"
+         },
+         {
+            "title": "Youtube",
+             "URL": "http://www.youtube.com",
+             "icon": "http://www.youtube.com/favicon.ico"
+         }
+         ]
+}
 
 
 # Run application

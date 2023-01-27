@@ -95,9 +95,14 @@ module.exports = configure(function (/* ctx */) {
     framework: {
       config: {
         'notify': {
-          color: "orange",
+          color: "amber",
           textColor: "white",
           position: "top"
+        },
+
+        loading: {
+          delay: "400",
+          message: "Generating summary..."
         }
       },
 
@@ -112,7 +117,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify']
+      plugins: ['Notify', 'Loading']
     },
 
     // animations: 'all', // --- includes all animations
