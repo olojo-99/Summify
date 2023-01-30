@@ -84,24 +84,28 @@
       v-else
         id="links"
         >
-        <div id="link-container">
+        <div id="link-container" class="flex column">
 
 
 <a v-for="link in links" v-bind:key="link"
 :href="link.URL"
-target="_blank">
+target="_blank"
+class="flex">
 <q-card
 class="q-pt-none"
 flat
-bordered
 square
 >
+<!-- <q-separator inset /> -->
+<q-card-section horizontal>
 <q-card-section>
   <img :src="link.icon" width="16" height="16">
 </q-card-section>
 <q-card-section>
   {{ link.title }}
 </q-card-section>
+</q-card-section>
+<!-- <q-separator inset /> -->
 </q-card>
 </a>
           
