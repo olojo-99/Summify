@@ -1,6 +1,5 @@
 import os
 import openai
-import time
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_caching import Cache
@@ -10,6 +9,8 @@ from summarise import sub_summarise
 from overall import meta_summarise
 from video_info import manual_transcript
 from parallel import thread_runner
+from extraction import topic_rank
+from search import google_search
 
 config = {
     "DEBUG": True,
@@ -46,15 +47,16 @@ def transcript_summary(vid_id):
     thread_runner(sub_summarise, vid_segments)
 
     # Generate overall summary based on summarised segments
-    ovr_summary = meta_summarise("\n".join(vid_segments.values()))
+    all_segments = "\n".join(vid_segments.values())
+    ovr_summary = meta_summarise(all_segments)
 
     # map video id to overall summary in cache
-    cache.set(vid_id, ovr_summary)
+    all_summaries = f"{ovr_summary}\n{all_segments}"
+    cache.set(vid_id, all_summaries)
 
     return jsonify(
         segments=vid_segments,
         overall=ovr_summary)
-
 
 # GET request from Frontend for Google links will have no data
 # Links will be based on Fact Extraction on summarised segments
@@ -64,29 +66,17 @@ def transcript_summary(vid_id):
 @cache.cached(timeout=300) # caching IR results
 def ir_links(vid_id):
     # get cached overall summary for video
-    time.sleep(3)
-    ovr_summary = cache.get(vid_id)
-    return {
-    "links":
-        [{"title": "Google",
-          "URL": "http://www.google.com",
-          "icon": "http://www.google.com/favicon.ico"
-          },
-         {
-             "title": "Facebook",
-             "URL": "http://www.facebook.com",
-             "icon": "http://www.facebook.com/favicon.ico"
-         },
-         {
-            "title": "Youtube",
-             "URL": "http://www.youtube.com",
-             "icon": "http://www.youtube.com/favicon.ico"
-         }
-         ]
-}
+    summaries = cache.get(vid_id)
+
+    # run summaries through topicrank algorithm
+    terms = topic_rank(summaries)
+
+    # perform search on terms
+    search_results = google_search(terms)
+
+    return jsonify(search_results)
 
 
 # Run application
 if __name__ == '__main__':
-
     app.run()
