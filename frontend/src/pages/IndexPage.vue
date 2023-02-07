@@ -11,7 +11,7 @@
       <div
         id="description"
         class="flex-item">
-        <p>Summify is a free study tool.</p>
+        <p>Summify is a college project that summarises Youtube transcripts.</p>
         <p>Enter a Youtube video link and click submit to generate a summarised transcript.</p>
         <p>Videos that do not have captions or have captions turned off by the author will not work.</p>
       </div>
@@ -88,7 +88,7 @@
 
 
 <a v-for="link in links" v-bind:key="link"
-:href="link.URL"
+:href="link.url"
 target="_blank"
 class="flex">
 <q-card
@@ -267,33 +267,21 @@ const getData = async id => {
 
                 console.log('getting links')
                 const response2 = await api.get(URL_BASE + "/links/" + id)
-                console.log(response)
+                console.log(response2)
                 const data2 = response2.data
-                links.value = data2.links
+                console.log(data2)
+                links.value = data2
                 links_ready.value = true;
-
-
-                
               }
               catch (error) {
                 console.log("REEEEEEE")
                 Notify.create("The request has failed. i'm truly sorry.")
                 Loading.hide()
               }
-                  // Loading.hide()
             }
 
 
 
-// const getLinks = async id => {
-//       console.log('getting links')
-//       const response = await api.get(URL_BASE + "/links/" + id)
-//       console.log(response)
-//       const data = response.data
-//       link1.value = data.IR[0]
-//       link2.value = data.IR[1]
-//       links_ready.value = true;
-//     }
 
 export default {
   setup() {
