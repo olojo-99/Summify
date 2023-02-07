@@ -4,9 +4,11 @@ import pytextrank
 # Load a spaCy model
 nlp = spacy.load("en_core_web_lg")
 
-# Add TopicRank component to pipeline
-# Exclude stopwords that could be generated due to completion prompt -> NLTK Stopwords
-nlp.add_pipe("topicrank", config={"stopwords": {"transcript":["NOUN"], "passage":["NOUN"], "extract":["NOUN"]}})
+# Exclude stopwords that could be generated due to completion prompt
+nlp.Defaults.stop_words |= {"transcript", "passage", "extract", "video"}
+
+# Add TopicRank component to pipeline with stopwords
+nlp.add_pipe("topicrank", config={"stopwords": {token:["NOUN"] for token in nlp.Defaults.stop_words} })
 
 def topic_rank(text):
     # Perform fact extraction on overall summary and segment summaries
