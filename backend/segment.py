@@ -5,6 +5,7 @@ from datetime import timedelta
 # 11 char ID must then be parsed from link
 # URL is used to fetch transcript summary and is segmented
 
+# * Add URL Validation *
 
 def segment_transcript(vid_id):
 
@@ -21,10 +22,10 @@ def segment_transcript(vid_id):
     vid_segments = {}
 
     # iterate through srt list and separate timestamps in 5min interval
-    interval = 300  # start in first 5min interval
+    interval = min(300, video_length)  # start in first 5min interval
 
     # create dict key containing timestamp string
-    start, end = timedelta(seconds=interval-300), timedelta(seconds=interval)
+    start, end = timedelta(seconds=0), timedelta(seconds=interval)
     timestamp = f"{start} - {end}"
 
     # add text segments to dictionary based in timestamp intervals
@@ -32,7 +33,7 @@ def segment_transcript(vid_id):
         # remove newlines, space and rejoin sentences
         text = " ".join(text_seg['text'].split())
 
-        # include . to stop mid sentence slicing
+        # include periods to avoid mid sentence slicing
         if text_seg['start'] < interval or "." in text_seg['text']:
             if timestamp not in vid_segments:
                 vid_segments[timestamp] = [text]
