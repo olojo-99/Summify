@@ -69,7 +69,7 @@ def ir_links(vid_id):
     summaries = cache.get(vid_id)
 
     # run summaries through topicrank algorithm
-    terms = topic_rank(summaries)
+    terms = list(topic_rank(summaries))
 
     # perform search on terms
     search_results = google_search(terms)
