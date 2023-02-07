@@ -158,8 +158,7 @@ target="_blank">
         class="flex-item">
 
         <div id="transcript-text">
-          <h1 class="text-h1">Summary</h1>
-          <h2>General:</h2>
+          <h2>General Summary:</h2>
           <p
             id="summary-body"
             class="text-body1">{{ text }}
@@ -169,7 +168,7 @@ target="_blank">
 
 
             <div id="sub-summaries" class="text-body1">
-              <div v-for="(value, key) in subs"  v-bind:key="key">
+              <div v-for="(value, key) in subs"  v-bind:key="key" class="sub-summary">
                 <span class="timestamp">{{ key }}: </span>{{ value }}
               </div>
             </div>
@@ -189,7 +188,14 @@ target="_blank">
 <script>
 import { defineComponent, ref } from "vue";
 import axios, { api } from 'boot/axios'
-import {Loading, Notify, QSpinnerGears} from 'quasar'
+import {Loading, Notify, QSpinnerGears, LoadingBar} from 'quasar'
+
+// LoadingBar.setDefaults({
+//   color: 'amber',
+//   size: '15px',
+//   position: 'bottom',
+//   increment: '10'
+// })
 
 
     const refComponent = ref(null)
@@ -221,8 +227,8 @@ import {Loading, Notify, QSpinnerGears} from 'quasar'
       }
       // scrolling up
       else {
-        header.style.height = "17em";
-        title.style.fontSize = "15em";
+        header.style.height = "12em";
+        title.style.fontSize = "10em";
         title.style.paddingTop = "0.32em";
         title.style.lineHeight = "3.125rem";
         title.style.paddingLeft = "0em";
@@ -314,17 +320,17 @@ export default {
           }
 
 
-          function trigger() {
-            const barRef = bar.value
-            barRef.start()
+          // function trigger() {
+          //   const barRef = bar.value
+          //   barRef.start()
 
-            setTimeout(() => {
-              const barRef = bar.value
-              if (barRef) {
-                barRef.stop()
-              }
-            }, Math.random() * 300 + 100)
-          }
+          //   setTimeout(() => {
+          //     const barRef = bar.value
+          //     if (barRef) {
+          //       barRef.stop()
+          //     }
+          //   }, Math.random() * 3000 + 1000)
+          // }
 
 
 
@@ -333,7 +339,7 @@ export default {
       id,
       bar,
       subs,
-      trigger,
+      // trigger,
       get_id,
       embed_id,
       sum: summary_ready,
@@ -347,7 +353,7 @@ export default {
         console.log("submit button pressed")
         const vid_id = get_id(id.value)
         if (vid_id) {
-          trigger()
+          // trigger()
           getData(vid_id)
           // getLinks(vid_id)
           

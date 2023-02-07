@@ -5,7 +5,7 @@
 
 
 #search-bar {
-  width: 60em;
+  width: 40em;
 }
 
 
@@ -34,7 +34,7 @@
 
 #header {
   padding: 0%;
-  height: 17em;
+  height: 12em;
 }
 
 
@@ -42,7 +42,7 @@
 #title {
   // font-family: 'Montserrat Alternates', sans-serif;
   height: 100%;
-  font-size: 15em;
+  font-size: 10em;
   overflow: hidden;
   position: absolute;
   display: inline-block;
@@ -54,7 +54,7 @@
   padding-left: 4em;
   position: absolute;
   height: 100%;
-  padding-top: 6.5em;
+  padding-top: 4.5em;
   overflow: visible;
 }
 
@@ -108,7 +108,8 @@
 
 
 #middle {
-  flex-grow: 6;
+  flex-grow: 3.5;
+  margin-bottom: 6em;
 }
 
 // #sub-summaries {
@@ -116,12 +117,18 @@
 // }
 
 .timestamp {
-  color: #e28b00;
+  color: #e27100;
+  font-weight: 600;
+}
+
+
+.sub-summary {
+  padding-bottom: 15px;
 }
 
 
 #video-embed {
-  align-items: left;
+ text-align: left;
 }
 
 
@@ -134,8 +141,8 @@
 
 
 .q-card {
-  margin-top: 2%;
-  margin-bottom: 2%;
+  // margin-top: 2%;
+  // margin-bottom: 2%;
   width: 100%;
 }
 
@@ -146,12 +153,18 @@
 }
 
 
+.q-card:hover {
+  transition: 0.2s;
+  background-color: rgb(202, 202, 202);
+}
+
+
+
 a {
   color: black;
   text-decoration: none;
   display: inline-block;
-  max-width: 50%;
-  width: 50%;
+  width: 35%;
   // padding-left: 1.5em;
   // padding-right: 1.5em;
 }
