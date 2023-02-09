@@ -109,44 +109,6 @@ square
 </q-card>
 </a>
           
-<!-- <a
-id="link1"
-v-bind:href="link1"
-target="_blank">
-          <q-card
-            class="q-pt-none"
-            flat
-            bordered
-            square>
-            <q-card-section>
-              <q-img src="https://picsum.photos/100/100"></q-img>
-            </q-card-section>
-
-            <q-card-section>
-              {{  link1  }}
-            </q-card-section>
-          </q-card>
-
-</a>
-
-<a
-id="link2"
-v-bind:href="link2"
-target="_blank">
-          <q-card
-            class="q-pt-none"
-            flat
-            bordered
-            square>
-            <q-card-section>
-              <q-img src="https://picsum.photos/100/100"></q-img>
-            </q-card-section>
-
-            <q-card-section>
-              {{  link2  }}
-            </q-card-section>
-          </q-card>
-</a> -->
 
         </div>
       </div>
@@ -179,7 +141,6 @@ target="_blank">
 
       </div>
 
-      <!-- right column -->
       
     </div>
   </q-page>
@@ -189,14 +150,6 @@ target="_blank">
 import { defineComponent, ref } from "vue";
 import axios, { api } from 'boot/axios'
 import {Loading, Notify, QSpinnerGears, LoadingBar} from 'quasar'
-
-// LoadingBar.setDefaults({
-//   color: 'amber',
-//   size: '15px',
-//   position: 'bottom',
-//   increment: '10'
-// })
-
 
     const refComponent = ref(null)
     const id = ref(null)
@@ -262,7 +215,6 @@ const getData = async id => {
                 subs.value = data.segments
                 console.log(subs.value)
                 summary_ready.value = true;
-                // insertSubs(data.text.sub)
                 Loading.hide()
 
                 console.log('getting links')
@@ -274,8 +226,8 @@ const getData = async id => {
                 links_ready.value = true;
               }
               catch (error) {
-                console.log("REEEEEEE")
-                Notify.create("The request has failed. i'm truly sorry.")
+                console.log("Error processing the request")
+                Notify.create("We're sorry, the request has failed. The video might not have a transcript available or is too long. Or there was a problem on our end.")
                 Loading.hide()
               }
             }
