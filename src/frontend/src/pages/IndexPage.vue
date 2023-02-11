@@ -51,6 +51,8 @@
       </div>
     </div>
 
+    <!-- Request returned -->
+
     <div
       v-else
       id="content"
@@ -62,8 +64,6 @@
         class="flex-item">
         <div id="video-embed">
           <iframe
-            width="560"
-            height="315"
             v-bind:src="embed_id(get_id(id))"
             title="YouTube video player"
             frameborder="0"
@@ -108,11 +108,16 @@ square
 <!-- <q-separator inset /> -->
 </q-card>
 </a>
-          
+
 
         </div>
       </div>
       </div>
+
+
+
+
+
 
       <!-- middle column -->
       <div
@@ -141,7 +146,7 @@ square
 
       </div>
 
-      
+
     </div>
   </q-page>
 </template>
@@ -162,7 +167,7 @@ import {Loading, Notify, QSpinnerGears, LoadingBar} from 'quasar'
 
 
 const getData = async id => {
-              
+
               try {
                 Loading.show({
                 message: "Generating summary",
@@ -265,7 +270,7 @@ export default {
           // trigger()
           getData(vid_id)
           // getLinks(vid_id)
-          
+
         }
         else {
           // error handling here
