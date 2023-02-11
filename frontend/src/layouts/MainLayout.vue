@@ -99,6 +99,33 @@ import { defineComponent } from "vue";
 //     link: 'https://awesome.quasar.dev'
 //   }
 // ]
+window.onscroll = scroll;
+
+function scroll () {
+      let title = document.getElementById("title")
+      let flavour = document.getElementById("flavour")
+      let header = document.getElementById("header")
+      // scrolling down
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        title.style.fontSize = "1.5em";
+        title.style.paddingTop = "0.0em";
+        title.style.paddingLeft = "0.2em";
+        title.style.lineHeight = "1.5em";
+        flavour.style.fontSize = "0em";
+        flavour.style.opacity = "0.0";
+        header.style.height = "2.5em";
+      }
+      // scrolling up
+      else {
+        header.style.height = "12em";
+        title.style.fontSize = "10em";
+        title.style.paddingTop = "0.32em";
+        title.style.lineHeight = "3.125rem";
+        title.style.paddingLeft = "0.2em";
+        flavour.style.fontSize = "2em";
+        flavour.style.opacity = "0.7";
+      }
+    }
 
 export default defineComponent({
   name: "MainLayout",

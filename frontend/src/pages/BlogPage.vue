@@ -1,3 +1,5 @@
 <template>
-    <p>This is the blog lol</p>
+    <div id="blog-container">
+        <p>This is the blog lol</p>
+    </div>
 </template>

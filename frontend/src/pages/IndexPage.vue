@@ -30,7 +30,7 @@
             filled
             type="url"
             outlined
-            label="Insert Video URL"
+            label="Insert Youtube Video URL"
             for="link-input"
           />
           <q-ajax-bar
@@ -159,37 +159,6 @@ import {Loading, Notify, QSpinnerGears, LoadingBar} from 'quasar'
     var URL_BASE = "http://127.0.0.1:5000"
     const summary_ready = ref(false);
     const links_ready = ref(false)
-
-
-    // window.onload = init;
-    window.onscroll = scroll;
-
-    function scroll () {
-      let title = document.getElementById("title")
-      let flavour = document.getElementById("flavour")
-      let header = document.getElementById("header")
-      // scrolling down
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        title.style.fontSize = "1.5em";
-        title.style.paddingTop = "0.0em";
-        title.style.paddingLeft = "0.2em";
-        title.style.lineHeight = "1.5em";
-        flavour.style.fontSize = "0em";
-        flavour.style.opacity = "0.0";
-        header.style.height = "2.5em";
-      }
-      // scrolling up
-      else {
-        header.style.height = "12em";
-        title.style.fontSize = "10em";
-        title.style.paddingTop = "0.32em";
-        title.style.lineHeight = "3.125rem";
-        title.style.paddingLeft = "0em";
-        flavour.style.fontSize = "2em";
-        flavour.style.opacity = "0.7";
-      }
-    }
-
 
 
 const getData = async id => {
