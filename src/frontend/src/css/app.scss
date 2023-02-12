@@ -123,7 +123,7 @@
 
 
 #summary-body {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 // #sub-summaries {
@@ -161,7 +161,8 @@ iframe {
 }
 
 #link-container {
-  width: 55%;
+  min-width: 60%;
+  width: 70%;
   justify-content: center;
   align-items: left;
 }
