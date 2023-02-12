@@ -11,7 +11,7 @@ def rewrite_segment(segment):
         "model": "text-davinci-003",
         "prompt": rewrite_prompt(segment),
         "temp": 0.6,
-        "tokens": 1000,
+        "tokens": 500,
         "top_p": 1,
         "freq_pen": 0,
         "pres_pen": 0

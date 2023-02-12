@@ -13,7 +13,7 @@ def google_search(phrases):
     results = [] # contains all results
 
     for term in phrases:
-        resources = {} # contain individual json responses
+        resources = {} # contains individual json responses
         
         # make search through search engine api
         data = service.cse().list(
@@ -26,7 +26,8 @@ def google_search(phrases):
 
         # add resultant page title, link and icon to dict
         resources['title'], resources['url'] = data['items'][0]['title'], data['items'][0]['link']
-        resources['icon'] = "/".join( (data['items'][0]['link']).split("/")[:3] ) + "/favicon.ico"
-        results.append(resources)
+        resources['icon'] = "/".join( (data['items'][0]['link']).split("/")[:5] ) + "/favicon.ico"
+        if resources not in results:
+            results.append(resources) # add unique resources
 
-    return results
+    return results[:3] # top 3 unique results
