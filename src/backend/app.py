@@ -22,14 +22,16 @@ app = Flask(__name__)  # creating instance of flask app with same name as file
 CORS(app)  # activate cors
 
 app.config.from_mapping(config)
-cache = Cache(app) # only one cookie per client
+cache = Cache(app)  # only one cookie per client
 
 # GET request from Frontend will contain video id in request vid_id
 # Full video URL needs to be parsed on frontend
 
 # Return Timestamp/Segment pairs + Overall summary
+
+
 @app.route("/summarise/<vid_id>", methods=["GET"])
-@cache.cached(timeout=300) # caching summarisation results
+@cache.cached(timeout=300)  # caching summarisation results
 def transcript_summary(vid_id):
 
     # vid_id = "Unl1jXFnzgo"  # EXAMPLE MANUAL TRANSCRIPT ID
@@ -62,8 +64,10 @@ def transcript_summary(vid_id):
 # Links will be based on Fact Extraction on summarised segments
 
 # Returns list of Google links
+
+
 @app.route("/links/<vid_id>", methods=["GET"])
-@cache.cached(timeout=300) # caching IR results
+@cache.cached(timeout=300)  # caching IR results
 def ir_links(vid_id):
     # get cached overall summary for video
     summaries = cache.get(vid_id)

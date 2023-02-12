@@ -90,7 +90,7 @@
 <a v-for="link in links" v-bind:key="link"
 :href="link.url"
 target="_blank"
-class="flex">
+class="flex link">
 <q-card
 class="q-pt-none"
 flat
@@ -199,7 +199,11 @@ const getData = async id => {
                 links.value = data2
                 links_ready.value = true;
               }
-              catch (error) {
+              catch (err) {
+                if (err.response) {
+                  console.log(err.response.status)
+                }
+                console.log(err.response)
                 console.log("Error processing the request")
                 Notify.create("We're sorry, the request has failed. The video might not have a transcript available or is too long. Or there was a problem on our end.")
                 Loading.hide()

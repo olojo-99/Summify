@@ -37,6 +37,12 @@
   height: 12em;
 }
 
+#blog-link {
+  display: inline-block;
+  position: absolute;
+  padding-left: 93%;
+  font-size: 1.2em;
+}
 
 
 #title {
@@ -179,11 +185,13 @@ iframe {
   background-color: rgb(202, 202, 202);
 }
 
-
-
 a {
-  color: black;
+  z-index: 10000;
+  color: inherit;
   text-decoration: none;
+}
+
+.link {
   display: inline-block;
   width: 70%;
 }
@@ -216,4 +224,5 @@ a {
 #blog-container {
   margin-left: 25%;
   margin-right: 25%;
+  padding-top: 6em;
 }

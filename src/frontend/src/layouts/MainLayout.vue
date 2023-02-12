@@ -20,10 +20,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Quicksand&display=swap" rel="stylesheet">
 
 
-
+    <a href="/">
         <div id="title" class="text-h3">Summify</div>
         <div id="flavour" class="text-subtitle1">Condense your productivity</div>
-    </q-header>
+      </a>
+      <div id="blog-link"><a href="./#/blog">Development Blog</a></div>
+      </q-header>
 
     <!-- <q-drawer
       v-model="leftDrawerOpen"
