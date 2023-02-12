@@ -74,8 +74,8 @@
   margin-top: 2%;
   display: flex;
   transition: height 0.3s ease-out;
-  padding-left: 10em;
-  padding-right: 25em;
+  // padding-left: 10em;
+  // padding-right: 25em;
 }
 
 #content {
@@ -116,6 +116,7 @@
   position: sticky;
   top: 6em;
   margin-top: 6em;
+  padding-left: 10em;
 }
 
 
@@ -123,6 +124,7 @@
 #middle {
   flex-grow: 3.5;
   margin-bottom: 6em;
+  padding-right: 30em;
 }
 
 
