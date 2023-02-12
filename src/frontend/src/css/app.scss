@@ -39,9 +39,13 @@
 
 #blog-link {
   display: inline-block;
-  position: absolute;
-  padding-left: 93%;
-  font-size: 1.2em;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  font-size: 1.5em;
+  color: #e27100;
+  padding-right: 1em;
+  padding-bottom: 1em;
 }
 
 
@@ -70,8 +74,8 @@
   margin-top: 2%;
   display: flex;
   transition: height 0.3s ease-out;
-  padding-left: 5%;
-  padding-right: 10%;
+  padding-left: 10em;
+  padding-right: 25em;
 }
 
 #content {
