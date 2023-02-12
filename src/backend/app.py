@@ -37,8 +37,10 @@ def transcript_summary(vid_id):
     # Create dict of timestamps and matching transcript segment
     vid_segments = segment_transcript(vid_id)
     # return error if empty dict (max length exceeded)
-    if not vid_segments:
+    if vid_segments == "Max Length Exceeded":
         return "Video exceeds maximum length", 550
+    elif vid_segments == "Unavailable":
+        return "Transcript Unavailable", 560
 
     # Rewrite segments if auto-generated transcript
     if auto_transcript(vid_id):

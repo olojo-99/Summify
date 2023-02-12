@@ -11,14 +11,18 @@ from video_info import invalid_length
 def segment_transcript(vid_id):
 
     # SRT format is then obtained through YT transcript API
-    srt = YouTubeTranscriptApi.get_transcript(vid_id)
+    try:
+        srt = YouTubeTranscriptApi.get_transcript(vid_id)
+    except: # transcript unavailable
+        return "Unavailable" # return error 560
+
 
     # get length of video in seconds
     video_length = int(srt[-1]['start'] + srt[-1]['duration'])
 
     # check if video exceeds length limit
     if invalid_length(vid_id, video_length):
-        return {} # empty dictionary will cause server to return error code
+        return "Max Length Exceeded" # return error 550
 
     # keep track of number of timestamps
     num_timestamps = len(srt)

@@ -19,7 +19,8 @@ nlp.Defaults.stop_words |= {"transcript", "passage", "extract",
                             "term", "video", "segment",
                             "text", "paragraph", "paper",
                             "course", "lesson", "college",
-                            "university", "lecture", "class"}
+                            "university", "lecture", "class", 
+                            "theory", "principle", "focus"}
 
 # Add TopicRank component to pipeline with stopwords
 nlp.add_pipe("topicrank", config={
