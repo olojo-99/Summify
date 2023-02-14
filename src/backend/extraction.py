@@ -14,13 +14,13 @@ def plural_scrubber():
 nlp = spacy.load("en_core_web_lg")
 
 
-# Exclude stopwords that could be generated due to completion prompt
+# Exclude stopwords that could be generated due to gpt3 completion
 nlp.Defaults.stop_words |= {"transcript", "passage", "extract",
                             "term", "video", "segment",
                             "text", "paragraph", "paper",
                             "course", "lesson", "college",
                             "university", "lecture", "class", 
-                            "theory", "principle", "focus"}
+                            "theory", "principle", "concept"}
 
 # Add TopicRank component to pipeline with stopwords
 nlp.add_pipe("topicrank", config={
