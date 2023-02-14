@@ -22,8 +22,8 @@ nlp.Defaults.stop_words |= {"transcript", "passage", "extract",
                             "university", "lecture", "class", 
                             "theory", "principle", "concept"}
 
-# Add TopicRank component to pipeline with stopwords
-nlp.add_pipe("topicrank", config={
+# Add TextRank component to pipeline with stopwords
+nlp.add_pipe("textrank", config={
                         "stopwords": {token:["NOUN"] for token in nlp.Defaults.stop_words},
                         "scrubber": {"@misc": "plural_scrubber"}})
 
