@@ -6,7 +6,7 @@ def update_segment(func, vid_dict, timestamp, text):
     return timestamp, vid_dict[timestamp]
 
 
-# function to run tasks in parallel
+# function to run tasks concurrently
 def thread_runner(func, vid_segments):
     threads = []
     with ThreadPoolExecutor(max_workers=len(vid_segments)) as executor:

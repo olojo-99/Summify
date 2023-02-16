@@ -9,7 +9,7 @@ from rewrite import rewrite_segment
 from summarise import sub_summarise
 from overall import meta_summarise
 from video_info import auto_transcript
-from parallel import thread_runner
+from concurrent import thread_runner
 from extraction import topic_rank
 from search import google_search
 
@@ -44,12 +44,12 @@ def transcript_summary(vid_id):
 
     # Rewrite segments if auto-generated transcript
     if auto_transcript(vid_id):
-        thread_runner(rewrite_segment, vid_segments) # parallelised
+        thread_runner(rewrite_segment, vid_segments) # multithreaded
         # vid_segments = {stamp: rewrite_segment(vid_segments[stamp]) for stamp in vid_segments}
         sleep(1) # delay segment summarisation
 
     # Summarise segments of video transcript
-    thread_runner(sub_summarise, vid_segments) # parallelised
+    thread_runner(sub_summarise, vid_segments) # multithreaded
     # vid_segments = {stamp: sub_summarise(vid_segments[stamp]) for stamp in vid_segments}
 
     # Generate overall summary based on summarised segments
