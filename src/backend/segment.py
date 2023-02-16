@@ -1,6 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from datetime import timedelta
-from video_info import invalid_length
+# from video_info import invalid_length
 
 # video URL will be received through GET request from quasar frontend
 # 11 char ID must then be parsed from link
@@ -20,8 +20,9 @@ def segment_transcript(vid_id):
     # get length of video in seconds
     video_length = int(srt[-1]['start'] + srt[-1]['duration'])
 
-    # check if video exceeds length limit
-    if invalid_length(vid_id, video_length):
+    # check if video exceeds length limit of 100 mins
+    # if invalid_length(vid_id, video_length):
+    if video_length > 6000: # 1hr40
         return "Max Length Exceeded" # return error 550
 
     # keep track of number of timestamps

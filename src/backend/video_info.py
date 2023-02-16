@@ -13,13 +13,13 @@ def auto_transcript(vid_id):
         return False
 
 
-def invalid_length(vid_id, vid_length):
-    # return true for auto or manual vids that exceed length limit
-    if auto_transcript(vid_id):
-        if vid_length > 3600: # 1h
-            return True
-    else: # manual transcript
-        if vid_length > 5400: # 1h30
-            return True
+# def invalid_length(vid_id, vid_length):
+#     # return true for auto or manual vids that exceed length limit
+#     if auto_transcript(vid_id):
+#         if vid_length > 3600: # 1h
+#             return True
+#     else: # manual transcript
+#         if vid_length > 5400: # 1h30
+#             return True
 
-    return False # valid length
+#     return False # valid length
