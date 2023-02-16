@@ -44,13 +44,13 @@ def transcript_summary(vid_id):
 
     # Rewrite segments if auto-generated transcript
     if auto_transcript(vid_id):
-        vid_segments = {stamp: rewrite_segment(vid_segments[stamp]) for stamp in vid_segments}
-        thread_runner(rewrite_segment, vid_segments)
-        sleep(2) # delay segment summarisation
+        thread_runner(rewrite_segment, vid_segments) # parallelised
+        # vid_segments = {stamp: rewrite_segment(vid_segments[stamp]) for stamp in vid_segments}
+        sleep(1) # delay segment summarisation
 
     # Summarise segments of video transcript
-    vid_segments = {stamp: sub_summarise(vid_segments[stamp]) for stamp in vid_segments}
-    thread_runner(sub_summarise, vid_segments)
+    thread_runner(sub_summarise, vid_segments) # parallelised
+    # vid_segments = {stamp: sub_summarise(vid_segments[stamp]) for stamp in vid_segments}
 
     # Generate overall summary based on summarised segments
     all_segments = "\n".join(vid_segments.values())
@@ -63,6 +63,7 @@ def transcript_summary(vid_id):
     return jsonify(
         segments=vid_segments,
         overall=ovr_summary)
+
 
 # GET request from Frontend for Google links will have no body
 # Links will be based on Fact Extraction on summarised segments
@@ -82,6 +83,7 @@ def ir_links(vid_id):
 
     return jsonify(search_results)
 
+# !L!0!U!I!$!€!
 
 # Run application
 if __name__ == '__main__':
