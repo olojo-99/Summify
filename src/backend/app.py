@@ -83,8 +83,6 @@ def ir_links(vid_id):
 
     return jsonify(search_results)
 
-# !L!0!U!I!$!€!
-
 # Run application
 if __name__ == '__main__':
     app.run()
