@@ -9,9 +9,10 @@ from rewrite import rewrite_segment
 from summarise import sub_summarise
 from overall import meta_summarise
 from video_info import auto_transcript
-from concurrent import thread_runner
+from concurrency import thread_runner
 from extraction import topic_rank
 from search import google_search
+
 
 config = {
     "DEBUG": True,
@@ -25,15 +26,11 @@ CORS(app)  # activate cors
 app.config.from_mapping(config)
 cache = Cache(app) # only one cookie per client
 
-# GET request from Frontend will contain video id in request vid_id
-# Full video URL needs to be parsed on frontend
 
 # Return Timestamp/Segment pairs + Overall summary
 @app.route("/summarise/<vid_id>", methods=["GET"])
 @cache.cached(timeout=300) # caching summarisation results
 def transcript_summary(vid_id):
-    # vid_id = "Unl1jXFnzgo"  # EXAMPLE MANUAL TRANSCRIPT ID
-
     # Create dict of timestamps and matching transcript segment
     vid_segments = segment_transcript(vid_id)
     # return error if empty dict (max length exceeded)
@@ -65,14 +62,11 @@ def transcript_summary(vid_id):
         overall=ovr_summary)
 
 
-# GET request from Frontend for Google links will have no body
-# Links will be based on Fact Extraction on summarised segments
-
 # Returns list of Google links
 @app.route("/links/<vid_id>", methods=["GET"])
 @cache.cached(timeout=300) # caching IR results
 def ir_links(vid_id):
-    # get cached overall summary for video
+    # get cached summary for video
     summaries = cache.get(vid_id)
 
     # run summaries through topicrank algorithm
@@ -82,6 +76,7 @@ def ir_links(vid_id):
     search_results = google_search(terms)
 
     return jsonify(search_results)
+
 
 # Run application
 if __name__ == '__main__':
