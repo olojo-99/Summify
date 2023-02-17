@@ -6,16 +6,12 @@ from datetime import timedelta
 # 11 char ID must then be parsed from link
 # URL is used to fetch transcript summary and is segmented
 
-# * Add URL Validation *
-
 def segment_transcript(vid_id):
-
     # SRT format is then obtained through YT transcript API
     try:
         srt = YouTubeTranscriptApi.get_transcript(vid_id)
     except: # transcript unavailable
         return "Unavailable" # return error 560
-
 
     # get length of video in seconds
     video_length = int(srt[-1]['start'] + srt[-1]['duration'])
@@ -27,8 +23,6 @@ def segment_transcript(vid_id):
 
     # keep track of number of timestamps
     num_timestamps = len(srt)
-
-    # tokens = [segment['text'] for segment in srt]
     vid_segments = {}
 
     # iterate through srt list and separate timestamps in 5min interval
