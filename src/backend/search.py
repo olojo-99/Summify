@@ -7,8 +7,6 @@ google_key = os.getenv("G_KEY")
 google_cx = os.getenv("G_CX")
 
 # func takes list of extracted terms and returns dict of resultant page titles and links
-
-
 def google_search(phrases):
     service = build("customsearch", "v1", developerKey=google_key)
 
