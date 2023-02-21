@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 import openai
+import time
 
 load_dotenv() # take environment variables from .env
 openai.api_key = os.getenv("OPENAI_API_KEY")
