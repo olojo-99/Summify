@@ -1,4 +1,4 @@
-import os
+import os, time
 from dotenv import load_dotenv
 import openai
 
@@ -29,7 +29,7 @@ def gpt3_completion(model, prompt, temp, top_p, tokens, freq_pen, pres_pen):
             retry += 1
             # check number of attempts
             if retry < max_retry:
-                sleep(2)
+                time.sleep(2)
                 continue # return to start of call
             else:
                 return "Error generating GPT-3 Completion\n"
