@@ -28,7 +28,7 @@ nlp.add_pipe("textrank", config={
                         "scrubber": {"@misc": "plural_scrubber"}})
 
 
-def topic_rank(text):
+def text_rank(text):
     # Perform fact extraction on overall summary and segment summaries
     doc = nlp(text)
 

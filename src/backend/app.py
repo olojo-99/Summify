@@ -10,12 +10,12 @@ from summarise import sub_summarise
 from overall import meta_summarise
 from video_info import auto_transcript
 from concurrency import thread_runner
-from extraction import topic_rank
+from extraction import text_rank
 from search import google_search
 
 
 config = {
-    "DEBUG": True,
+    "DEBUG": True, # Running in debug mode
     "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 300
 }
@@ -70,7 +70,7 @@ def ir_links(vid_id):
     summaries = cache.get(vid_id)
 
     # run summaries through topicrank algorithm
-    terms = list(topic_rank(summaries))
+    terms = list(text_rank(summaries))
 
     # perform search on terms
     search_results = google_search(terms)

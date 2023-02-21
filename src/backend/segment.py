@@ -1,5 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from datetime import timedelta
+import string
 # from video_info import invalid_length
 
 # video URL will be received through GET request from quasar frontend
@@ -37,8 +38,8 @@ def segment_transcript(vid_id):
         # remove newlines, space and rejoin sentences
         text = " ".join(text_seg['text'].split())
 
-        # include periods to avoid mid sentence slicing
-        if text_seg['start'] < interval or "." in text_seg['text']:
+        # check punctuation to avoid mid sentence slicing
+        if (text_seg['start'] < interval) or any([pct in text_seg['text'] for pct in string.punctuation]):
             if timestamp not in vid_segments:
                 vid_segments[timestamp] = [text]
             else:
