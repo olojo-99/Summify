@@ -166,6 +166,9 @@ const getData = async id => {
       else if (err.response.status == 550) {
         Notify.create("Video exceeds maximum length.")
       }
+      else if (err.response.status == 570) {
+        Notify.create("GPT-3 Unavailable")
+      }
       else {
         Notify.create("We're sorry, something went wrong on our end.")
       }

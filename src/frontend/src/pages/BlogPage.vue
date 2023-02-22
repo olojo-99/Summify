@@ -137,5 +137,11 @@
             We're very happy with our progress.
             <br><br>
         </p>
+        <p><span class="timestamp">21/02/23</span><br>Frontend:<br>
+            As we are nearing the deadline for project completion, the majority of the effort is focused on the user
+            manual and functional specification. Small changes were made to the frontend, such as changing the margins
+            on the summaries and the blog page.
+            <br><br>
+        </p>
     </div>
 </template>
