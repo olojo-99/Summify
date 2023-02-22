@@ -1,7 +1,6 @@
 from completion import gpt3_completion
 from utils import completion_err
 
-
 # generate prompt for summarising segments
 def sub_prompt(extract):
     # return f"Summarise the following video segment.\n\nvideo segment: \"\"\"\n{extract}\n\"\"\"\n"
