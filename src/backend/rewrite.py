@@ -1,4 +1,5 @@
 from completion import gpt3_completion
+from utils import completion_err
 
 # generate prompt for rewriting auto generated transcipts
 def rewrite_prompt(extract):
@@ -18,4 +19,4 @@ def rewrite_segment(segment):
     }
 
     # rewrite segment with gpt3
-    return gpt3_completion(**params)
+    return completion_err( gpt3_completion(**params) )

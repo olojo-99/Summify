@@ -7,6 +7,7 @@ load_dotenv() # take environment variables from .env
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
+# Generate GPT-3 completion
 def gpt3_completion(model, prompt, temp, top_p, tokens, freq_pen, pres_pen):
     # make up to 3 GPT-3 calls
     max_retry , retry = 3, 0
@@ -33,4 +34,4 @@ def gpt3_completion(model, prompt, temp, top_p, tokens, freq_pen, pres_pen):
                 time.sleep(2)
                 continue # return to start of call
             else:
-                return "Error generating GPT-3 Completion\n"
+                return "Error generating GPT-3 Completion"

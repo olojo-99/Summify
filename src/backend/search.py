@@ -12,26 +12,30 @@ def google_search(phrases):
 
     results = []  # contains all results
 
-    for term in phrases:
-        resources = {}  # contains individual json responses
+    try:
+        for term in phrases:
+            resources = {}  # contains individual json responses
 
-        # make search through search engine api
-        data = service.cse().list(
-            q=term,
-            cx=google_cx,
-            num=1,
-            siteSearch="wikipedia.org",
-            siteSearchFilter="i"
-        ).execute()
+            # make search through search engine api
+            data = service.cse().list(
+                q=term,
+                cx=google_cx,
+                num=1,
+                siteSearch="wikipedia.org",
+                siteSearchFilter="i"
+            ).execute()
 
-        # add resultant page title, link and icon to dict
-        resources['title'], resources['url'] = data['items'][0]['title'], data['items'][0]['link']
-        # resources['icon'] = "/".join( (data['items'][0]['link']).split("/")[:5] ) + "/favicon.ico"
-        resources['icon'] = get_ico(resources['url'])
-        if resources not in results:
-            results.append(resources)  # add unique resources
+            # add resultant page title, link and icon to dict
+            resources['title'], resources['url'] = data['items'][0]['title'], data['items'][0]['link']
+            # resources['icon'] = "/".join( (data['items'][0]['link']).split("/")[:5] ) + "/favicon.ico"
+            resources['icon'] = get_ico(resources['url'])
+            if resources not in results:
+                results.append(resources)  # add unique resources
 
-    return results[:3]  # top 3 unique results
+        return results[:3]  # top 3 unique results
+
+    except Exception as error:
+        return "Custom Search Engine Error"
 
 
 def get_ico(url):

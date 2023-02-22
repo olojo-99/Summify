@@ -12,7 +12,7 @@ def meta_summarise(text):
         "model": "text-davinci-003",
         "prompt": meta_prompt(text),
         "temp": 0.6,
-        "tokens": 500,
+        "tokens": 300,
         "top_p": 1,
         "freq_pen": 0,
         "pres_pen": 0

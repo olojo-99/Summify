@@ -1,8 +1,8 @@
 from completion import gpt3_completion
+from utils import completion_err
+
 
 # generate prompt for summarising segments
-
-
 def sub_prompt(extract):
     # return f"Summarise the following video segment.\n\nvideo segment: \"\"\"\n{extract}\n\"\"\"\n"
     return f"The following is an extract from a video transcript. Rewrite this as a structured, clear summary.\n\nVideo Transcript Extract: \"\"\"\n{extract}\n\"\"\"\n"
@@ -16,11 +16,11 @@ def sub_summarise(segment):
         "model": "text-curie-001",
         "prompt": sub_prompt(segment),
         "temp": 0.6,
-        "tokens": 500,
+        "tokens": 200,
         "top_p": 1,
         "freq_pen": 0,
         "pres_pen": 0
     }
 
     # summarise segment with gpt3
-    return gpt3_completion(**params)
+    return completion_err( gpt3_completion(**params) )
