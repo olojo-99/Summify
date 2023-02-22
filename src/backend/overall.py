@@ -1,4 +1,5 @@
 from completion import gpt3_completion
+from utils import completion_err
 
 # generate prompt for summarising overall text
 def meta_prompt(text):
@@ -19,4 +20,4 @@ def meta_summarise(text):
     }
 
     # summarise overall text with gpt3
-    return gpt3_completion(**params)
+    return completion_err( gpt3_completion(**params) )
