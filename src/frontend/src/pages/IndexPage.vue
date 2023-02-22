@@ -2,11 +2,12 @@
   <q-page id="main-container" class="flex">
 
     <div v-if="sum == false" id="search-container" class="flex flex-center flex-item column">
-
+      <!-- <div id="search-image"></div> -->
       <div id="description" class="flex-item">
-        <p>Summify is a college project that summarises Youtube transcripts.</p>
+        <p>Summify is a college project that summarises Youtube videos.</p>
         <p>Enter a Youtube video link and click submit to generate a summarised transcript.</p>
-        <p>Videos that do not have captions or have captions turned off by the author will not work.</p>
+        <p>Videos that do not have captions or have captions turned off by the author <span class="emphasis">will not work.</span></p>
+        <p>Please allow up to a minute for summary generation for longer videos.</p>
       </div>
 
       <div id="search-bar" class="flex-item">
