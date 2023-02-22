@@ -41,13 +41,14 @@
         </div>
 
 
-        <div v-if="links_ready == false" id="right" class="flex-items">
+        <div v-if="links_ready == 'A'" id="right" class="flex-items">
           <q-spinner color="accent" size="10em" />
           <h5 class="text-h5">Retrieving information from summary: Generating links</h5>
 
 
         </div>
-        <div v-else id="links">
+
+        <div v-else-if="links_ready == 'B'" id="links">
           <div id="link-container" class="flex column">
 
 
@@ -68,6 +69,10 @@
 
 
           </div>
+        </div>
+
+        <div v-else-if="links_ready == 'C'" id="links-error">
+          <p>Related links unavailable, something went wrong on our end.</p>
         </div>
       </div>
 
@@ -116,7 +121,7 @@ var links = ref(null);
 var subs = ref(null)
 var URL_BASE = "http://127.0.0.1:5000"
 const summary_ready = ref(false);
-const links_ready = ref(false)
+const links_ready = ref('A')
 
 // sending youtube video id to backend
 const getData = async id => {
@@ -150,12 +155,24 @@ const getData = async id => {
     // second call to backend to get information retrieval links
     // call made after the first one completes as backend needs to fully process summaries before it does IR
     console.log('getting links')
-    const response2 = await api.get(URL_BASE + "/links/" + id)
-    console.log(response2)
-    const data2 = response2.data
-    console.log(data2)
-    links.value = data2
-    links_ready.value = true;
+    try {
+      const response2 = await api.get(URL_BASE + "/links/" + id)
+      console.log(response2)
+      const data2 = response2.data
+      console.log(data2)
+      links.value = data2
+      links_ready.value = 'B';
+    }
+    catch (err) {
+      if (err.response) {
+        if (err.response.status == 580) {
+          console.log(err.response.status)
+          links_ready.value = 'C'
+          Notify.create("Related links unavailable.")
+        }
+      }
+    }
+    
   }
   catch (err) {
     // error handling different cases
