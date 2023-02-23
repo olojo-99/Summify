@@ -3,9 +3,7 @@ from utils import completion_err
 
 # generate prompt for summarising segments
 def sub_prompt(extract):
-    # return f"Summarise the following video segment.\n\nvideo segment: \"\"\"\n{extract}\n\"\"\"\n"
     return f"The following is an extract from a video transcript. Rewrite this as a structured, clear summary.\n\nVideo Transcript Extract: \"\"\"\n{extract}\n\"\"\"\n"
-    # return f"Summarise the following extract from a video transcript, focusing on important facts while still keeping the overall structure of the text.\n\nTranscript: \"\"\"\n{extract}\n\"\"\"\n"
 
 
 # invoke func for querying gpt-3 and summarise transcript segment

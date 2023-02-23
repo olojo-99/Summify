@@ -3,7 +3,6 @@ from utils import completion_err
 
 # generate prompt for summarising overall text
 def meta_prompt(text):
-    # return f"Create a complete overall summary of the following combined video segments.\n\n combined video segments: \"\"\"\n{text}\n\"\"\"\n"
     return f"The following is a combination of video extract summaries. Rewrite this as a structured, clear summary.\n\nCombined Transcript Extracts: \"\"\"\n{text}\n\"\"\"\n"
 
 

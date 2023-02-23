@@ -1,7 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from datetime import timedelta
 import string
-# from video_info import invalid_length
 
 # video URL will be received through GET request from quasar frontend
 # 11 char ID must then be parsed from link

@@ -16,7 +16,6 @@ from utils import err_handler
 
 
 config = {
-    # "DEBUG": True, # Running in debug mode
     "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 300
 }
@@ -32,7 +31,7 @@ cache = Cache(app) # only one cookie per client
 @app.route("/summarise/<vid_id>", methods=["GET"])
 @cache.cached(timeout=300) # caching summarisation results
 def transcript_summary(vid_id):
-    # Create \dict of timestamps and matching transcript segment
+    # Create dict of timestamps and matching transcript segment
     vid_segments = segment_transcript(vid_id)
 
     # return error if error found during transcription
