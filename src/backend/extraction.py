@@ -32,7 +32,7 @@ def text_rank(text):
     # Perform fact extraction on overall summary and segment summaries
     doc = nlp(text)
 
-    # Create unique list of top 5 ranked phrases
+    # Create unique set from top 5 ranked phrases
     phrases = {phrase.text for phrase in doc._.phrases[:5]}
 
     return phrases
