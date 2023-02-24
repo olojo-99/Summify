@@ -9,7 +9,7 @@
 
       <a href="/">
         <div id="title" class="text-h3">Summify</div>
-        <div id="flavour" class="text-subtitle1">Condense your productivity</div>
+        <div id="flavour" class="text-subtitle1">Watch less, learn more</div>
       </a>
       <div id="blog-link"><a href="./#/blog">Development Blog</a></div>
     </q-header>
