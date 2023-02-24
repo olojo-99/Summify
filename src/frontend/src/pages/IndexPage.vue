@@ -1,27 +1,24 @@
 <template>
   <q-page id="main-container" class="flex">
 
+    <!-- Conditional rendering -->
     <div v-if="sum == false" id="search-container" class="flex flex-center flex-item column">
       <!-- <div id="search-image"></div> -->
       <div id="description" class="flex-item">
         <p>Summify is a college project that summarises Youtube videos.</p>
         <p>Enter a Youtube video link and click submit to generate a summarised transcript.</p>
-        <p>Videos that do not have captions or have captions turned off by the author <span class="emphasis">will not work.</span></p>
+        <p>Videos that do not have captions or have captions turned off by the author <span class="emphasis">will not
+            work.</span></p>
         <p>Please allow up to a minute for summary generation for longer videos.</p>
       </div>
 
       <div id="search-bar" class="flex-item">
+        <!-- Preventing submission to not reload page -->
         <q-form ref="formComponent" @submit.prevent>
           <div id="bar-button">
-            <q-input v-model="id" error-message="Please enter a valid Youtube video" name="id" filled type="url"
+            <q-input v-model="id" error-message="Please enter a valid Youtube video URL" name="id" filled type="url"
               outlined label="Insert Youtube Video URL" for="link-input" />
-              <q-ajax-bar
-            id="ajax"
-            ref="bar"
-            position="bottom"
-            color="accent"
-            size="20px"
-          />
+            <q-ajax-bar id="ajax" ref="bar" position="bottom" color="accent" size="20px" />
 
             <q-btn @click="onSubmit" id="submit-button" label="Submit" type="submit" color="primary" />
           </div>
@@ -52,7 +49,7 @@
         <div v-else-if="links_ready == 'B'" id="links">
           <div id="link-container" class="flex column">
 
-
+            <!-- Vue for-loop rendering, allows variable number of links returned -->
             <a v-for="link in links" v-bind:key="link" :href="link.url" target="_blank" class="flex link">
               <q-card class="q-pt-none" flat square>
                 <!-- <q-separator inset /> -->
@@ -111,9 +108,9 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { ref } from "vue";
 import axios, { api } from 'boot/axios'
-import { Loading, Notify, QSpinnerGears, LoadingBar } from 'quasar'
+import { Loading, Notify } from 'quasar'
 
 const refComponent = ref(null)
 const id = ref(null)
@@ -173,7 +170,7 @@ const getData = async id => {
         }
       }
     }
-    
+
   }
   catch (err) {
     // error handling different cases

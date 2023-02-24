@@ -1,6 +1,8 @@
 <template>
   <div id="blog-container" class="text-body1">
-    <p><span class="timestamp">28/12/22</span><br>Having only completed one full-stack project, our knowledge of
+    <p><span class="timestamp">28/12/22</span><br>Having only completed one full-stack project, our
+      knowledge
+      of
       leading platforms and frameworks was quite low. We were originally going to go with Django for the backend
       and Node.js for the frontend, but after some research decided to go with Flask for the backend, and with
       Quasar for the frontend.<br>
