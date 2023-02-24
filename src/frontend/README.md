@@ -1,7 +1,5 @@
 # Quasar App (frontend)
 
-Youtube Transcript summariser
-
 ## Install the dependencies
 ```bash
 yarn
