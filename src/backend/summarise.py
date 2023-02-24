@@ -9,11 +9,10 @@ def sub_prompt(extract):
 # invoke func for querying gpt-3 and summarise transcript segment
 def sub_summarise(segment):
     params = {
-        # "model": "text-davinci-003",
         "model": "text-curie-001",
         "prompt": sub_prompt(segment),
         "temp": 0.6,
-        "tokens": 200,
+        "tokens": 300,
         "top_p": 1,
         "freq_pen": 0,
         "pres_pen": 0

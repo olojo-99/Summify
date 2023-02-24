@@ -12,9 +12,8 @@ def auto_transcript(vid_id):
         return False
 
 # Error handling for /summarise responses
-# Returns error message, error code
 def err_handler(response):
-    # check for 550 error
+    # Returns error message, error code
     if response == "Max Length Exceeded":
         return "Video exceeds maximum length", 550
 

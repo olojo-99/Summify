@@ -27,7 +27,6 @@ def google_search(phrases):
 
             # add resultant page title, link and icon to dict
             resources['title'], resources['url'] = data['items'][0]['title'], data['items'][0]['link']
-            # resources['icon'] = "/".join( (data['items'][0]['link']).split("/")[:5] ) + "/favicon.ico"
             resources['icon'] = get_ico(resources['url'])
             if resources not in results:
                 results.append(resources)  # add unique resources

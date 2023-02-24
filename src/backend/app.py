@@ -16,6 +16,7 @@ from utils import err_handler
 
 
 config = {
+    "DEBUG": False,
     "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 300
 }
@@ -48,7 +49,6 @@ def transcript_summary(vid_id):
         if gpt3_err:
             return gpt3_err
 
-        # vid_segments = {stamp: rewrite_segment(vid_segments[stamp]) for stamp in vid_segments}
         sleep(1) # delay segment summarisation
 
     # Summarise segments of video transcript
@@ -58,8 +58,6 @@ def transcript_summary(vid_id):
     gpt3_err =  err_handler(vid_segments)
     if gpt3_err:
         return gpt3_err
-
-    # vid_segments = {stamp: sub_summarise(vid_segments[stamp]) for stamp in vid_segments}
 
     # Generate overall summary based on summarised segments
     all_segments = "\n".join(vid_segments.values())
