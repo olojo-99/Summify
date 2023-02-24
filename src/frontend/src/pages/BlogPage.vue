@@ -1,147 +1,189 @@
 <template>
-    <div id="blog-container" class="text-body1">
-        <p><span class="timestamp">28/12/22</span><br>Having only completed one full-stack project, our knowledge of
-            leading platforms and frameworks was quite low. We were originally going to go with Django for the backend
-            and Node.js for the frontend, but after some research decided to go with Flask for the backend, and with
-            Quasar for the frontend.<br><br>
-            Our reasoning was that our web app will be a single-page-application (SPA) without registered users,so we
-            would not need all of the heavy lifting features that DJango provides (admin panel, database, authentication
-            etc.).<br><br>
-            Flask is lightweight and flexible and provides simple HTTP request handling which was perfect for us.
-            Quasar is a frontend Javascript framework built on Vue.js, and includes many built-in components and
-            functionality (loading bars, spinners etc.) which we thought would speed up and optimise our development
-            process. In our research we had learned about Vue's virtual DOM and dynamic rendering of HTML elements,
-            which would be good for a SPA where we do not have any routes and all of the work is done on the one page.
-            From the brainstorming part of the project we had the vision for our page to not have to reload when a
-            request is processed, and Quasar would let us do that.<br><br>
-        </p>
-        <p><span class="timestamp">02/01/23</span><br>This week we focused on outlining the different prototypes we
-            would have to build during the initial stages of the implementation phase. To do this, we revisited our
-            functional specification and highlighted the several components that the application would entail as well as
-            the functionality.<br><br>
+  <div id="blog-container" class="text-body1">
+    <p><span class="timestamp">28/12/22</span><br>Having only completed one full-stack project, our knowledge of
+      leading platforms and frameworks was quite low. We were originally going to go with Django for the backend
+      and Node.js for the frontend, but after some research decided to go with Flask for the backend, and with
+      Quasar for the frontend.<br>
+      Our reasoning was that our web app will be a single-page-application (SPA) without registered users,so we
+      would not need all of the heavy lifting features that DJango provides (admin panel, database, authentication
+      etc.).<br>
+      Flask is lightweight and flexible and provides simple HTTP request handling which was perfect for us.
+      Quasar is a frontend Javascript framework built on Vue.js, and includes many built-in components and
+      functionality (loading bars, spinners etc.) which we thought would speed up and optimise our development
+      process. In our research we had learned about Vue's virtual DOM and dynamic rendering of HTML elements,
+      which would be good for a SPA where we do not have any routes and all of the work is done on the one page.
+      From the brainstorming part of the project we had the vision for our page to not have to reload when a
+      request is processed, and Quasar would let us do that.<br><br>
+    </p>
+    <p><span class="timestamp">02/01/23</span><br>This week we focused on outlining the different prototypes we
+      would have to build during the initial stages of the implementation phase. To do this, we revisited our
+      functional specification and highlighted the several components that the application would entail as well as
+      the functionality.<br>
 
-            We determined that prototypes for backend components would be created within Juptyter notebook and used as
-            the building blocks of the application. These prototypes included obtaining the video transcript through the
-            YouTube Transcript API, generating the transcript summary through GPT-3, fact extraction using spaCy with
-            the TextRank extension as well as information retrieval through the Google Search API.
-            <br><br>
-            We also planned the initial backend Flask and frontend Quasar application that would serve as the skeletons
-            of the communicating application within the final project. This planning also included outlining the API
-            endpoints and the GET requests/responses that would be used within the application.
-            <br><br>
-        </p>
-        <p><span class="timestamp">09/01/23</span><br>Frontend:<br>This week we set up quasar locally to get started on
-            the frontend
-            development. The Setup was simple, we just followed the steps from the website. We built a HTML skeleton for
-            the site with a simple header and page title. We created separate branches in our GIT repository to test the
-            frontend and backend independently. We thought it would be easier to connect the frontend to a version of
-            the backend that would return hard coded data. We did this to be able to style the frontend without having
-            to deal with bugs on the backend, and to know how we wanted to structure the data that would be returned
-            from the backend.<br><br>
-            Backend:<br>
-            We focused on testing the various GPT-3
-            models available to see which would be the optimal for the project and its constraints. The GPT-3 models
-            available through the OpenAI platform include Babbage, Curie and Da Vinci, with each having different prices
-            for the completions or responses generated by the model.<br><br>
+      We determined that prototypes for backend components would be created within Juptyter notebook and used as
+      the building blocks of the application. These prototypes included obtaining the video transcript through the
+      YouTube Transcript API, generating the transcript summary through GPT-3, fact extraction using spaCy with
+      the TextRank extension as well as information retrieval through the Google Search API.
+      <br>
+      We also planned the initial backend Flask and frontend Quasar application that would serve as the skeletons
+      of the communicating application within the final project. This planning also included outlining the API
+      endpoints and the GET requests/responses that would be used within the application.
+      <br><br>
+    </p>
+    <p><span class="timestamp">09/01/23</span><br><span class="emphasis">Frontend:</span><br>This week we set up quasar
+      locally to get started on
+      the frontend
+      development. The Setup was simple, we just followed the steps from the website. We built a HTML skeleton for
+      the site with a simple header and page title. We created separate branches in our GIT repository to test the
+      frontend and backend independently. We thought it would be easier to connect the frontend to a version of
+      the backend that would return hard coded data. We did this to be able to style the frontend without having
+      to deal with bugs on the backend, and to know how we wanted to structure the data that would be returned
+      from the backend.<br><br>
+      <span class="emphasis">Backend:</span><br>
+      We focused on testing the various GPT-3
+      models available to see which would be the optimal for the project and its constraints. The GPT-3 models
+      available through the OpenAI platform include Babbage, Curie and Da Vinci, with each having different prices
+      for the completions or responses generated by the model.<br>
 
-            Once we determined which model would be best suited for the tasks, we began coding within jupyter notebooks
-            to interface with the models outside of the OpenAI Playground.
-            Within jupyter notebooks, we wrote the initial code for summarising video transcripts that would later be
-            used as a template within the backend flask application. We tested the models on short form text and later
-            moved onto longer extracts of text.<br><br>
+      Once we determined which model would be best suited for the tasks, we began coding within jupyter notebooks
+      to interface with the models outside of the OpenAI Playground.
+      Within jupyter notebooks, we wrote the initial code for summarising video transcripts that would later be
+      used as a template within the backend flask application. We tested the models on short form text and later
+      moved onto longer extracts of text.<br>
 
-            Within jupyter notebooks we also wrote the python scripts that would be used to get the transcript of a
-            YouTube video given the video URL. This was done using the Python YouTube Transcript API and some text
-            processing to correctly format the user's input and the API's responses.
-            <br><br>
-        </p>
-        <p><span class="timestamp">15/01/23</span><br>Frontend:<br>
-            We added a new route and page for a “/summary” page, where the website would redirect to after the YouTube
-            link was submitted. This was because in previous projects we made, we made many pages and routes and this is
-            what we were used to doing in order to display different content, however this would load a new page and not
-            be a smooth transition like we had originally planned.<br><br>
+      Within jupyter notebooks we also wrote the python scripts that would be used to get the transcript of a
+      YouTube video given the video URL. This was done using the Python YouTube Transcript API and some text
+      processing to correctly format the user's input and the API's responses.
+      <br><br>
+    </p>
+    <p><span class="timestamp">15/01/23</span><br><span class="emphasis">Frontend:</span><br>
+      We added a new route and page for a “/summary” page, where the website would redirect to after the YouTube
+      link was submitted. This was because in previous projects we made, we made many pages and routes and this is
+      what we were used to doing in order to display different content, however this would load a new page and not
+      be a smooth transition like we had originally planned.<br>
 
-            We then dived deeper into Vue.js and read the documentation for “v-if” and “v-else” which is how Vue handles
-            conditional rendering. The video embed and the summary paragraph now display once the submit button is
-            pressed. We combined this with Quasar's built in “@submit.prevent” function to have the data passed to the
-            backend without reloading the page (as is default when a form is submitted).
-            We also created 2 separate GIT branches for both of us to be able to try different things without breaking
-            the backend/frontend for the other. For the frontend testing branch, we hard-coded the response data from
-            the backend as the actual backend was not finished yet.<br><br>
+      We then dived deeper into Vue.js and read the documentation for “v-if” and “v-else” which is how Vue handles
+      conditional rendering. The video embed and the summary paragraph now display once the submit button is
+      pressed. We combined this with Quasar's built in “@submit.prevent” function to have the data passed to the
+      backend without reloading the page (as is default when a form is submitted).
+      We also created 2 separate GIT branches for both of us to be able to try different things without breaking
+      the backend/frontend for the other. For the frontend testing branch, we hard-coded the response data from
+      the backend as the actual backend was not finished yet.<br>
 
-            We are using the Axios client to make HTTP requests from the frontend. Axios comes included with Quasar and
-            it makes making requests very simple. We are also using async/await syntax rather than chained .then()
-            statements as we find it more readable and easier to manage.
-            <br><br>
-            Backend:<br>
-            Throughout this week we focused on tying together the scripts for getting the transcript of a video and
-            feeding it into the GPT-3 model. This involved dividing the video transcript into 5 minute segments in order
-            to adhere to the maximum number of tokens accepted by the GPT-3 model. The YouTube Transcript API returned a
-            segmented transcript but with unordered timestamps, so it was necessary to manually divide the video
-            transcript into its segments so that each segment could be summarised effectively.
-            <br><br>
-            Once we had a mapping of each video segment based on timestamps to the corresponding text, we were able to
-            begin summarising the transcript segments in series through GPT-3 programmatically. This involved cycles of
-            testing, altering the parameters of the model and generating prompts that effectively conveyed the task that
-            we wanted the model to complete. Through this we were able to obtain cogent summaries that effectively
-            described the subject matter of the video segments.
-            <br><br>
-            Once we were able to generate summaries of the video segments, we then focused on generating an overall
-            summary of the whole video based on the smaller segment summaries. This involved a similar method used for
-            the segment summaries but with different model parameters and a prompt that provided further context on the
-            problem being solved.
-            <br><br>
-        </p>
-        <p><span class="timestamp">20/01/23</span><br>Frontend:<br>
-            We worked on the styling of the frontend and decided to divide the layout of the summary + the video embed
-            and relevant links into 3 columns:<br><br>
-            Left column: Video embed<br>
-            Middle column: Summary<br>
-            Right column: Links<br><br>
-            To achieve this we used flexbox containers. We had to do a small amount of reading and trial and error but
-            eventually we were able to get the layout working as intended with 3 columns of different sizes,
-            proportional to each other.<br><br>
-        </p>
-        <p><span class="timestamp">23/01/23</span><br>Frontend:<br>We wanted the header of the page to be large and show
-            off our website's title, but once the summary was generated we found it to be too big and taking up too much
-            space. To solve this we added a function that triggers when the page scrolls which makes the header and the
-            text inside shrink when the page is scrolled down, and expand when scrolled to the top.
-            We want the page to be as aesthetic as we can to give the website a professional feel.
-            <br><br>
-            After some thoughts and examining other websites that contain large bodies of text we decided to remove the
-            right column from the frontend layout, and instead move the links to the left hand side underneath the video
-            embed. We did this in order to reduce cognitive load for the user and also give the summary more space. We
-            are not UI experts (yet) but we felt it looked cleaner and more sleek.
-            <br><br>
-            We also added a small description to the page describing what Summify is and how to use it.
-            <br><br>
-        </p>
-        <p><span class="timestamp">30/01/23</span><br>Frontend:<br>
-            We added loading animations for when a request is being processed. We used Quasar's built-in 'AJAX Bar' and
-            'Loading' components to display a loading circle in the middle of the screen and a progress bar at the
-            bottom of the screen. The circle is to show the user that their request is being processed, and the bar is
-            to indicate how much progress has been made. The bar actually progresses in random increments as we are not
-            able to measure the progress of a single request, but we thought it would reassure the user that their
-            request is getting closer to completion. We're still not sure if we'll keep it or not.
-            <br><br>
-        </p>
-        <p><span class="timestamp">12/02/23</span><br>Frontend:<br>
-            As we are nearing the project deadline, we are focusing now on testing the quality of the summaries Summify
-            produces. This is pretty hard to test as we do not have a definitive metric to tell us how good our
-            summaries are, so we are doing a few different things to measure the accuracy.
-            We are starting off by doing manual reviews of the summaries, and seeing if the produced summary covers all
-            important information and facts.
-            <br><br>
-            This approach has also led to us doing some prompt engineering and trying out different prompts for GPT3 to
-            see which produces the best summary.
-            We're very happy with our progress.
-            <br><br>
-        </p>
-        <p><span class="timestamp">21/02/23</span><br>Frontend:<br>
-            As we are nearing the deadline for project completion, the majority of the effort is focused on the user
-            manual and functional specification. Small changes were made to the frontend, such as changing the margins
-            on the summaries and the blog page.
-            <br><br>
-        </p>
-    </div>
+      We are using the Axios client to make HTTP requests from the frontend. Axios comes included with Quasar and
+      it makes making requests very simple. We are also using async/await syntax rather than chained .then()
+      statements as we find it more readable and easier to manage.
+      <br><br>
+      <span class="emphasis">Backend:</span><br>
+      Throughout this week we focused on tying together the scripts for getting the transcript of a video and
+      feeding it into the GPT-3 model. This involved dividing the video transcript into 5 minute segments in order
+      to adhere to the maximum number of tokens accepted by the GPT-3 model. The YouTube Transcript API returned a
+      segmented transcript but with unordered timestamps, so it was necessary to manually divide the video
+      transcript into its segments so that each segment could be summarised effectively.
+      <br>
+      Once we had a mapping of each video segment based on timestamps to the corresponding text, we were able to
+      begin summarising the transcript segments in series through GPT-3 programmatically. This involved cycles of
+      testing, altering the parameters of the model and generating prompts that effectively conveyed the task that
+      we wanted the model to complete. Through this we were able to obtain cogent summaries that effectively
+      described the subject matter of the video segments.
+      <br>
+      Once we were able to generate summaries of the video segments, we then focused on generating an overall
+      summary of the whole video based on the smaller segment summaries. This involved a similar method used for
+      the segment summaries but with different model parameters and a prompt that provided further context on the
+      problem being solved.
+      <br><br>
+    </p>
+    <p><span class="timestamp">20/01/23</span><br><span class="emphasis">Frontend:</span><br>
+      We worked on the styling of the frontend and decided to divide the layout of the summary + the video embed
+      and relevant links into 3 columns:<br><br>
+      Left column: Video embed<br>
+      Middle column: Summary<br>
+      Right column: Links<br><br>
+      To achieve this we used flexbox containers. We had to do a small amount of reading and trial and error but
+      eventually we were able to get the layout working as intended with 3 columns of different sizes,
+      proportional to each other.<br><br>
+    </p>
+    <p><span class="timestamp">22/01/23</span><br><span class="emphasis">Backend:</span><br>
+      This week we focused on effectively rewriting the video segment summaries after we determined that auto-generated
+      transcripts had a poor structure that negatively impacted the summaries produced by GPT-3.<br>
+      We conducted some research on prompt engineering to determine the optimal way to structure the prompt to GPT-3 and
+      ran some tests. We created a module for rewriting the transcripts segments that could be reused within the backend
+      application.
+      .<br><br>
+    </p>
+    <p><span class="timestamp">23/01/23</span><br><span class="emphasis">Frontend:</span><br>We wanted the header of the
+      page to be large and show
+      off our website's title, but once the summary was generated we found it to be too big and taking up too much
+      space. To solve this we added a function that triggers when the page scrolls which makes the header and the
+      text inside shrink when the page is scrolled down, and expand when scrolled to the top.
+      We want the page to be as aesthetic as we can to give the website a professional feel.
+      <br>
+      After some thoughts and examining other websites that contain large bodies of text we decided to remove the
+      right column from the frontend layout, and instead move the links to the left hand side underneath the video
+      embed. We did this in order to reduce cognitive load for the user and also give the summary more space. We
+      are not UI experts (yet) but we felt it looked cleaner and more sleek.
+      <br>
+      We also added a small description to the page describing what Summify is and how to use it.
+      <br><br>
+    </p>
+    <p><span class="timestamp">30/01/23</span><br><span class="emphasis">Frontend:</span><br>
+      We added loading animations for when a request is being processed. We used Quasar's built-in 'AJAX Bar' and
+      'Loading' components to display a loading circle in the middle of the screen and a progress bar at the
+      bottom of the screen. The circle is to show the user that their request is being processed, and the bar is
+      to indicate how much progress has been made. The bar actually progresses in random increments as we are not
+      able to measure the progress of a single request, but we thought it would reassure the user that their
+      request is getting closer to completion. We're still not sure if we'll keep it or not.
+      <br><br>
+      <span class="emphasis">Backend:</span><br>
+      Once we had developed the individual components for rewriting segments, segment summaries and overall summaries,
+      we developed some automated test cases using the Pytest python library. We designed basic unit tests that ensure
+      each module was operating as expected and updated these tests when necessary.
+      <br><br>
+    </p>
+    <p><span class="timestamp">07/02/23</span><br><span class="emphasis">Backend:</span><br>
+      Once we had each component needed to summarise the transcripts, we focused on effectively tying together the
+      different components. This week we developed the separate python modules used within the Flask application. These
+      modules were combined programmatically and ran to evaluate their functionality.<br>
+      We ensured that each module work correctly when imported within the Flask application and data flowing between
+      each module was altered as expected.
+      <br><br>
+    </p>
+    <p><span class="timestamp">12/02/23</span><br><span class="emphasis">Frontend:</span><br>
+      As we are nearing the project deadline, we are focusing now on testing the quality of the summaries Summify
+      produces. This is pretty hard to test as we do not have a definitive metric to tell us how good our
+      summaries are, so we are doing a few different things to measure the accuracy.
+      We are starting off by doing manual reviews of the summaries, and seeing if the produced summary covers all
+      important information and facts.
+      <br>
+      This approach has also led to us doing some prompt engineering and trying out different prompts for GPT3 to
+      see which produces the best summary.
+      We're very happy with our progress.
+      <br><br>
+    </p>
+    <p><span class="timestamp">15/02/23</span><br><span class="emphasis">Backend:</span><br>
+      This week we began setting up the Information Retrieval pipeline used to retrieve key web resources associated
+      with each video.<br>
+      We set up the initial Jupyter notebook for developing the fact extraction component using spaCy and the TextRank
+      algorithm. We implemented the component as planned but had to include additional components for extracting the
+      lemmas or base forms of different words to ensure uniqueness and a component for removing stop words that weren’t
+      indicative of the key video themes.<br>
+      We developed a unit test for this component to ensure that it was operating as expected using the Pytest python
+      library.
+      <br><br>
+    </p>
+    <p><span class="timestamp">21/02/23</span><br><span class="emphasis">Frontend:</span><br>
+      As we are nearing the deadline for project completion, the majority of the effort is focused on the user
+      manual and functional specification. Small changes were made to the frontend, such as changing the margins
+      on the summaries and the blog page.
+      <br><br>
+      <span class="emphasis">Backend:</span><br>
+      We focused on implementing the Google search functionality within a separate module this week. Within the notebook
+      for fact extraction, we began developing the component using the Google Client API. Reading documentation was
+      important as we had to design a custom Google search engine that returned the top Wikipedia links in search
+      results. This custom search engine was accessed via the API within the component.
+      Once the component was set up, we developed unit tests for it and tested how it performed with the fact extraction
+      component previously developed.
+      <br><br>
+    </p>
+  </div>
 </template>
