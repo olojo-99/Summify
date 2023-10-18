@@ -1,15 +1,3 @@
-All of your documentation should be placed in subdirectories of this directory.
-
-* Use the `1-proposal` sub-directory for your project proposal.
-* Use the `2-functional-specification` sub-directory for your functional specification.
-* Use the `3-final-reports` sub-directory for your video walk through, user manual and technical documentation.
-
-There are additional instructions in each of those sub-directories.  Please read them.
-
-Excluding the proposal document (and the video walkthrough), the general rule of thumb that you should
-adopt is that documents should be converted to PDF when finalised - and
-available for collection from your repo in time for the appropriate deadlines.
-
-While templates are provided in MS Word format, individual students may select
-whichever editing software they prefer - the only constraint is that
-the final revision of these documents should be converted to PDF.
+Summify is a web application that allows users to generate textual summaries of YouTube videos through Natural Language Processing. The application primarily aims to automate the process of summarising lengthy educational videos, such as video lectures, through creating abstractive summaries of the video transcripts. Within the application, video transcripts are fetched through user-specified URLs using the python YouTube Transcript API. These video transcripts are then divided into 5 minute segments which are used as input material for generating abstractive text summaries of the video segments. An overall text summary is then generated from the segment summaries and contains key information that is presented to the user. 
+The video transcripts are summarised using the GPT-3 language model developed and maintained by OpenAI, accessible within the application through the OpenAI Developers API. A zero shot summarisation approach is utilised with two GPT-3 models, Curie and DaVinci, being used to produce the summaries.
+The application additionally features an Information Retrieval functionality that leverages the spaCy NLP library and TextRank Keyword Extraction algorithm to identify key terms within the video transcripts. Once keywords are identified, the user is provided with links to the most relevant Wikipedia pages through the python Google Search API.
